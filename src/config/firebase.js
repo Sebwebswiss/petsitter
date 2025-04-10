@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber }
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA6jpYoUk48ugPRN5QNo5iy_tMm8WrIOcc",
-  authDomain: "petsitter-boca.firebaseapp.com",
-  projectId: "petsitter-boca",
-  storageBucket: "petsitter-boca.firebasestorage.app",
-  messagingSenderId: "133561143679",
-  appId: "1:133561143679:web:dea394d20a18bd6f48ca4a"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
