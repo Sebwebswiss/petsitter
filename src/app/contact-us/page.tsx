@@ -1,0 +1,154 @@
+"use client";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+
+const ContactUs = () => {
+    const [formData, setFormData] = useState({
+        service: "",
+        date: "",
+        email: "",
+        message: "",
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const response = await fetch("/api/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            toast.success("Message sent successfully!");
+            setFormData({ service: "", date: "", email: "", message: "" });
+        } else {
+            toast.error(data.error || "Failed to send the message.");
+        }
+    };
+    return (
+        <>
+            <div className="bg-black text-white">
+                {/* Hero Section */}
+                <div
+                    className="max-w-[90%] lg:max-w-6xl 2xl:max-w-7xl mx-auto w-full "
+                >   
+                    <header className="pb-[80px] pt-[150px]">
+                        <h1 className="text-5xl font-bold text-primary">Contact Us</h1>
+                    </header>
+                </div>
+
+                {/* Contact Section */}
+                <section className="max-w-[90%] lg:max-w-6xl 2xl:max-w-7xl mx-auto py-6 rounded-lg shadow-lg">
+                    <p className="text-lg text-gray-300 mb-6">
+                        Need help or have questions before booking? We’re here to assist. You can always
+                        contact us by phone or email (see the Contact & Support section below) if you
+                        want to discuss your pet’s needs in detail or if you’d like to meet the caregiver
+                        (Sebastien) beforehand. We want you to feel completely comfortable, so don’t
+                        hesitate to reach out at any stage of the booking process.
+                    </p>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* Contact Info */}
+                        <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+                            <h3 className="text-2xl font-semibold text-primary">Contact & Support</h3>
+                            <p className="mt-2 text-gray-300">
+                                <strong>Email:</strong> support@petcare.com
+                            </p>
+                            <p className="mt-2 text-gray-300">
+                                <strong>Phone:</strong> (123) 456-7890
+                            </p>
+                            <p className="mt-2 text-gray-300">
+                                <strong>Location:</strong> 123 Pet Street, Pet City
+                            </p>
+                        </div>
+
+                        {/* Contact Form */}
+                        <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+                            <h3 className="text-2xl font-semibold text-primary mb-4">Send Us a Message</h3>
+                            <form className="space-y-6" onSubmit={sendEmail}>
+                                <div className="relative">
+                                    <select
+                                        name="service"
+                                        value={formData.service}
+                                        onChange={handleChange}
+                                        className="w-full p-2 mb-4 rounded bg-gray-900 text-white border border-gray-600"
+                                    >
+                                        <option value="">Select Service</option>
+                                        <option value="Dog Walking">Dog Walking</option>
+                                        <option value="Pet Sitting & Home Visits">Pet Sitting & Home Visits</option>
+                                        <option value="Overnight Pet Sitting">Overnight Pet Sitting</option>
+                                        <option value="Specialized Services">Specialized Services</option>
+                                        <option value="Exotic Pet Care">Exotic Pet Care</option>
+                                    </select>
+                                </div>
+
+                                <div className="relative">
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        value={formData.date}
+                                        onChange={handleChange}
+                                        className="w-full p-2 mb-4 rounded bg-gray-900 text-white border border-gray-600"
+                                    />
+                                </div>
+
+                                <div className="relative">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="Enter your email..."
+                                        className="w-full p-2 mb-4 rounded bg-gray-900 text-white border border-gray-600"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="relative">
+                                    <textarea
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        placeholder="Your message..."
+                                        className="w-full p-2 mb-4 rounded bg-gray-900 text-white border border-gray-600"
+                                        rows={3}
+                                        required
+                                    ></textarea>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="w-full py-3 bg-golden text-black font-bold rounded-lg hover:bg-gold-600 transition-all transform hover:scale-[1.02]"
+                                >
+                                    Request Consultation
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {/* Google Maps Embed */}
+                    <div className="mt-10">
+                        <h3 className="text-2xl font-semibold text-primary text-center">Find Us Here</h3>
+                        <div className="mt-4 w-full h-64 rounded-lg overflow-hidden">
+                            <iframe
+                                className="w-full h-full"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509529!2d144.95373631531887!3d-37.81627977975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e49f9d29a4!2sPet%20Care!5e0!3m2!1sen!2sus!4v1614128745966!5m2!1sen!2sus"
+                                allowFullScreen
+                                loading="lazy"
+                            ></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
+    );
+};
+
+export default ContactUs;
