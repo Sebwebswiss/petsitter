@@ -3,13 +3,12 @@ import { getAuth, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber }
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDdYwDnlZ8yPf-cF6m4dqPp9xgLhtyaem0",
-  authDomain: "cryptosecur-web.firebaseapp.com",
-  projectId: "cryptosecur-web",
-  storageBucket: "cryptosecur-web.appspot.com",
-  messagingSenderId: "328522918925",
-  appId: "1:328522918925:web:47db01df477f6ddc93b944",
-  measurementId: "G-DKQ85PLMFG",
+  apiKey: "AIzaSyA6jpYoUk48ugPRN5QNo5iy_tMm8WrIOcc",
+  authDomain: "petsitter-boca.firebaseapp.com",
+  projectId: "petsitter-boca",
+  storageBucket: "petsitter-boca.firebasestorage.app",
+  messagingSenderId: "133561143679",
+  appId: "1:133561143679:web:dea394d20a18bd6f48ca4a"
 };
 
 const app = initializeApp(firebaseConfig);
