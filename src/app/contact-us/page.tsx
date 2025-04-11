@@ -139,7 +139,7 @@ const ContactUs = () => {
   <div className="mt-4 w-full h-64 rounded-lg overflow-hidden">
     <iframe
       className="w-full h-full"
-      src="https://www.google.com/maps?q=11+Plaza+Real+S,+Boca+Raton,+FL+33432&output=embed"
+      src="https://www.google.com/maps?q=Plaza+Real+S,+Boca+Raton,+FL+33432&output=embed"
       allowFullScreen
       loading="lazy"
     ></iframe>
