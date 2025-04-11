@@ -65,7 +65,7 @@ const ContactUs = () => {
                                 <strong>Phone:</strong> (561) 552-3529
                             </p>
                             <p className="mt-2 text-gray-300">
-                                <strong>Location:</strong> Plaza Real S 33430 Boca Raton
+                                <strong>Location:</strong> Plaza Real S, 33430, Boca Raton
                             </p>
                         </div>
 
