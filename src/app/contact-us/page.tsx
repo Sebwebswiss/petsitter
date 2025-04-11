@@ -66,6 +66,7 @@ const ContactUs = () => {
                             </p>
                             <p className="mt-2 text-gray-300">
                                 <strong>Location:</strong> Plaza Real S, 33430 Boca Raton
+                                </p>
                         </div>
 
                         {/* Contact Form */}
