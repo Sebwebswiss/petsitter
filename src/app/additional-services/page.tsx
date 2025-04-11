@@ -85,7 +85,7 @@ const Page = () => {
               Need help or have questions before booking?
               </h3>
               <p className="mt-3">
-               We&apos;re here to assist. You can always contact us by phone or email (see the Contact & Support section below) if you want to discuss your pet&apos;s needs in detail, or if you&apos;d like to meet the caregiver (Sebastien) beforehand. We want you to feel completely comfortable, so don&apos;t hesitate to reach out at any stage of the booking process. Our system is designed to be hassle-free: Google login makes signing in easy, and email confirmations provide a clear record of your bookings. Payments for services can be arranged securely after booking confirmation (we&apos;ll provide details on payment methods in the confirmation email). Once everything is set, you can look forward to top-notch pet care and peace of mind!
+               We&apos;re here to assist. You can always contact us by phone or email if you want to discuss your pet&apos;s needs in detail, or if you&apos;d like to meet the caregiver (Sebastien) beforehand. We want you to feel completely comfortable, so don&apos;t hesitate to reach out at any stage of the booking process. Our system is designed to be hassle-free: Google login makes signing in easy, and email confirmations provide a clear record of your bookings. Payments for services can be arranged securely after booking confirmation (we&apos;ll provide details on payment methods in the confirmation email). Once everything is set, you can look forward to top-notch pet care and peace of mind!
               </p>
             </div>
           </div>
