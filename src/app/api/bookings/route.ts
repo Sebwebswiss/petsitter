@@ -53,28 +53,52 @@ const createBookingHandler = async (request: NextRequest) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.GMAIL_USER, 
-        pass: process.env.GMAIL_PASS, 
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
       },
     });
 
-    const mailOptions = {
+    // Email vlasniku
+    const mailToOwner = {
       from: `"Booking Notifications" <${process.env.GMAIL_USER}>`,
       to: process.env.BUSINESS_OWNER_EMAIL,
       subject: "New Booking Request Received",
       text: `A new booking request has been received.
-        Service Type: ${req.servicetype}
-        Booking Request Start Date: ${req.startDate}
-        Booking Request End Date: ${req.endDate}
-        Booking Request Start Time: ${req.startTime}
-        Booking Request End Time: ${req.endTime}
-        Frequency: ${req.frequency}
-        User Name: ${user.firstName}
-        User Email: ${user.email}
-        `,
-      };
+Service Type: ${req.servicetype}
+Booking Request Start Date: ${req.startDate}
+Booking Request End Date: ${req.endDate}
+Booking Request Start Time: ${req.startTime}
+Booking Request End Time: ${req.endTime}
+Frequency: ${req.frequency}
+User Name: ${user.firstName}
+User Email: ${user.email}
+`,
+    };
 
-    await transporter.sendMail(mailOptions);
+    // Email korisniku
+    const mailToUser = {
+      from: `"PetCare Team" <${process.env.GMAIL_USER}>`,
+      to: user.email,
+      subject: "Your Booking Confirmation",
+      text: `Hi ${user.firstName},
+
+Thank you for booking with PetCare! Here are your booking details:
+
+Service: ${req.servicetype}
+Start Date: ${req.startDate}
+End Date: ${req.endDate}
+Start Time: ${req.startTime}
+End Time: ${req.endTime}
+Frequency: ${req.frequency}
+
+We look forward to caring for your pet 🐾
+
+Best regards,
+PetCare Team`,
+    };
+
+    await transporter.sendMail(mailToOwner);
+    await transporter.sendMail(mailToUser);
 
     return NextResponse.json({
       success: true,
@@ -82,7 +106,6 @@ const createBookingHandler = async (request: NextRequest) => {
       message: "Booking Created",
       data: newBooking,
     });
-
   } catch (error) {
     console.error(error);
     return NextResponse.json(
