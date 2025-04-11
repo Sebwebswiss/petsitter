@@ -48,7 +48,7 @@ const ContactUs = () => {
                 <section className="max-w-[90%] lg:max-w-6xl 2xl:max-w-7xl mx-auto py-6 rounded-lg shadow-lg">
                     <p className="text-lg text-gray-300 mb-6">
                         Need help or have questions before booking? We’re here to assist. You can always
-                        contact us by phone or email (see the Contact & Support section below) if you
+                        contact us by phone or email if you
                         want to discuss your pet’s needs in detail or if you’d like to meet the caregiver
                         (Sebastien) beforehand. We want you to feel completely comfortable, so don’t
                         hesitate to reach out at any stage of the booking process.
@@ -59,13 +59,13 @@ const ContactUs = () => {
                         <div className="bg-gray-800 p-6 rounded-lg shadow-md">
                             <h3 className="text-2xl font-semibold text-primary">Contact & Support</h3>
                             <p className="mt-2 text-gray-300">
-                                <strong>Email:</strong> support@petcare.com
+                                <strong>Email:</strong> pet.sitters.boca@gmail.com
                             </p>
                             <p className="mt-2 text-gray-300">
-                                <strong>Phone:</strong> (123) 456-7890
+                                <strong>Phone:</strong> (561) 552-3529
                             </p>
                             <p className="mt-2 text-gray-300">
-                                <strong>Location:</strong> 123 Pet Street, Pet City
+                                <strong>Location:</strong> Plaza Real S 33430 Boca Raton
                             </p>
                         </div>
 
