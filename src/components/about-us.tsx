@@ -53,8 +53,15 @@ const AboutUs = () => {
             ABOUT US
           </h2>
           <p className="text-md text-white mb-6 font-body  md:pr-16">
-          Welcome to Boca Raton Pet Care Services, your trusted partner for pet sitting, dog walking, feeding visits, and check-ins in Boca Raton, Florida and within a 30-mile radius. <br />
-           We know how important your pet is to you - they&apos;re family. With our 24/7 availability and years of experience in professional pet care, you can rest easy knowing your furry friend is in reliable, loving hands. We serve Boca Raton and surrounding communities, ensuring pets across the area get the care they deserve when you&apos;re busy or away. <br />Our team (led by Sebastien, an expert pet caregiver) is committed to keeping your pets happy, healthy, and safe at all times. Whether you need an overnight pet sitter or a quick daytime walk, we tailor our services to fit your schedule and your pet&apos;s routine. Book a service now through our easy online system and get peace of mind with confirmed, dependable pet care. <br /> We even offer convenient Google login for quick sign-in and email confirmations for every booking - making the process seamless from start to finish.Ready to get started? Contact us or log in now to schedule your first service. We can&apos;t wait to meet you and your pet! (New clients are welcome, and we&apos;re happy to answer any questions - just reach out.) Let us give your pets the attentive care and companionship they deserve, whenever you need it.
+          Trusted Pet Care in Boca Raton by Sebastien Services LLC
+
+At Pet Sitter Boca Raton by Sebastien Services LLC, your pets receive family-level treatment. Pet sitting, dog walking, feeding visits, and check-ins are options you can count on — 24/7 — anywhere in and around Boca Raton and within 30 miles to reach you.
+
+With years of experience and love for animals, our local staff makes sure your furry companions remain secure, well-looked-after and happy — EVEN when you are not there with them. Every service is fully adapted to your pet’s routine and comfort level with options like same-day bookings and overnight stays available.
+
+Making pet care simple: set up your account in seconds (Google sign-in option), book instantly online, and get instant email confirmations. Simple. Secure. Stress-free.
+
+New customers are more than welcome. Got questions? Just call on us — we'll glad to assist you!
           </p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
             <div className="">
