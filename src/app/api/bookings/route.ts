@@ -60,45 +60,45 @@ const createBookingHandler = async (request: NextRequest) => {
       },
     });
 
-    // Email vlasniku
+    // HTML za vlasnika
+    const htmlToOwner = `
+      <h2>New Booking Request Received</h2>
+      <p><strong>Service Type:</strong> ${req.servicetype}</p>
+      <p><strong>Start:</strong> ${req.startDate} at ${req.startTime}</p>
+      <p><strong>End:</strong> ${req.endDate} at ${req.endTime}</p>
+      <p><strong>Frequency:</strong> ${req.frequency}</p>
+      <p><strong>User:</strong> ${user.firstName} (${user.email})</p>
+    `;
+
     const mailToOwner = {
       from: `"Booking Notifications" <${process.env.EMAIL_USER}>`,
       to: process.env.BUSINESS_OWNER_EMAIL,
       subject: "New Booking Request Received",
-      text: `A new booking request has been received.
-
-Service Type: ${req.servicetype}
-Booking Request Start Date: ${req.startDate}
-Booking Request End Date: ${req.endDate}
-Booking Request Start Time: ${req.startTime}
-Booking Request End Time: ${req.endTime}
-Frequency: ${req.frequency}
-User Name: ${user.firstName}
-User Email: ${user.email}
-`,
+      html: htmlToOwner,
     };
 
-    // Email korisniku
+    // HTML za korisnika
+    const htmlToUser = `
+      <div style="font-family: Arial, sans-serif; color: #333;">
+        <h2>Thank you for your booking, ${user.firstName}!</h2>
+        <p>We have received your request and are excited to care for your pet.</p>
+        <hr />
+        <h3>Your Booking Details</h3>
+        <p><strong>Service:</strong> ${req.servicetype}</p>
+        <p><strong>Start:</strong> ${req.startDate} at ${req.startTime}</p>
+        <p><strong>End:</strong> ${req.endDate} at ${req.endTime}</p>
+        <p><strong>Frequency:</strong> ${req.frequency}</p>
+        <br />
+        <p>🐾 <strong>PetCare Team</strong></p>
+        <p style="font-size: 12px; color: #999;">This is an automated confirmation email from PetCare.</p>
+      </div>
+    `;
+
     const mailToUser = {
       from: `"PetCare Team" <${process.env.EMAIL_USER}>`,
       to: user.email,
       subject: "Your Booking Confirmation",
-      text: `Hi ${user.firstName},
-
-Thank you for booking with PetCare! Here are your booking details:
-
-Service: ${req.servicetype}
-Start Date: ${req.startDate}
-End Date: ${req.endDate}
-Start Time: ${req.startTime}
-End Time: ${req.endTime}
-Frequency: ${req.frequency}
-
-We look forward to caring for your pet 🐾
-
-Best regards,  
-PetCare Team
-`,
+      html: htmlToUser,
     };
 
     await transporter.sendMail(mailToOwner);
