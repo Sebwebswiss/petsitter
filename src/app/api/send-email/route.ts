@@ -4,6 +4,8 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const { service, date, email, message } = await req.json();
+    console.log("Sending confirmation to user email:", email);
+
 
     if (!email || !message) {
       return NextResponse.json(
