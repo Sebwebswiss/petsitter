@@ -51,19 +51,21 @@ const createBookingHandler = async (request: NextRequest) => {
     const newBooking = await Booking.create({ ...req, user: user._id });
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT),
+      secure: true, // koristi SSL/TLS
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
+    
+    
 
-    // Email vlasniku
-    const mailToOwner = {
-      from: `"Booking Notifications" <${process.env.GMAIL_USER}>`,
-      to: process.env.BUSINESS_OWNER_EMAIL,
-      subject: "New Booking Request Received",
-      text: `A new booking request has been received.
+    from: `"Booking Notifications" <${process.env.EMAIL_USER}>`,
+  to: process.env.BUSINESS_OWNER_EMAIL,
+  subject: "New Booking Request Received",
+  text: `A new booking request has been received.
 Service Type: ${req.servicetype}
 Booking Request Start Date: ${req.startDate}
 Booking Request End Date: ${req.endDate}
@@ -73,14 +75,14 @@ Frequency: ${req.frequency}
 User Name: ${user.firstName}
 User Email: ${user.email}
 `,
-    };
+};
 
-    // Email korisniku
-    const mailToUser = {
-      from: `"PetCare Team" <${process.env.GMAIL_USER}>`,
-      to: user.email,
-      subject: "Your Booking Confirmation",
-      text: `Hi ${user.firstName},
+// Email korisniku
+const mailToUser = {
+  from: `"PetCare Team" <${process.env.EMAIL_USER}>`,
+  to: user.email,
+  subject: "Your Booking Confirmation",
+  text: `Hi ${user.firstName},
 
 Thank you for booking with PetCare! Here are your booking details:
 
