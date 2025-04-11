@@ -193,7 +193,7 @@ const Page: React.FC = () => {
             </button>
 
             <div className="flex justify-between items-center w-full mt-5 mb-2">
-              <p className=" font-body text-left text-base sm:text-lg">
+              <p className=" font-body text-white text-left text-base sm:text-lg">
                 Don&apos;t have an account?{" "}
                 <Link href={"/client/signup"} className="font-bold text-red-500 hover:text-primary">
                   Sign Up
