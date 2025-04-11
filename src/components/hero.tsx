@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="relative z-10 lg:max-w-2xl lg:w-full md:h-[80vh] flex items-center">
           <div className="mx-auto max-w-7xl h-full flex items-center">
             <div className="sm:text-center lg:text-left flex flex-col h-full justify-center">
-              <h1 className="text-2xl md:text-3xl tracking-tight font-extrabold text-white  uppercase font-heading md:leading-[50px]">
+              <h1 className="text-2xl md:text-3xl tracking-tight font-extrabold text-white font-heading md:leading-[50px]">
                 <motion.span 
                   className="block xl:inline text-golden"
                   initial={{ opacity: 0 }}
