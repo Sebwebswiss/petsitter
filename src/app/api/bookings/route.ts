@@ -53,19 +53,20 @@ const createBookingHandler = async (request: NextRequest) => {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: Number(process.env.EMAIL_PORT),
-      secure: true, // koristi SSL/TLS
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
-    
-    
 
-    from: `"Booking Notifications" <${process.env.EMAIL_USER}>`,
-  to: process.env.BUSINESS_OWNER_EMAIL,
-  subject: "New Booking Request Received",
-  text: `A new booking request has been received.
+    // Email vlasniku
+    const mailToOwner = {
+      from: `"Booking Notifications" <${process.env.EMAIL_USER}>`,
+      to: process.env.BUSINESS_OWNER_EMAIL,
+      subject: "New Booking Request Received",
+      text: `A new booking request has been received.
+
 Service Type: ${req.servicetype}
 Booking Request Start Date: ${req.startDate}
 Booking Request End Date: ${req.endDate}
@@ -75,14 +76,14 @@ Frequency: ${req.frequency}
 User Name: ${user.firstName}
 User Email: ${user.email}
 `,
-};
+    };
 
-// Email korisniku
-const mailToUser = {
-  from: `"PetCare Team" <${process.env.EMAIL_USER}>`,
-  to: user.email,
-  subject: "Your Booking Confirmation",
-  text: `Hi ${user.firstName},
+    // Email korisniku
+    const mailToUser = {
+      from: `"PetCare Team" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Your Booking Confirmation",
+      text: `Hi ${user.firstName},
 
 Thank you for booking with PetCare! Here are your booking details:
 
@@ -95,8 +96,9 @@ Frequency: ${req.frequency}
 
 We look forward to caring for your pet 🐾
 
-Best regards,
-PetCare Team`,
+Best regards,  
+PetCare Team
+`,
     };
 
     await transporter.sendMail(mailToOwner);
