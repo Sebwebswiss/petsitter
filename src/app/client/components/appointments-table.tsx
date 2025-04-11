@@ -57,7 +57,8 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
   const [page, setPage] = useState(1);
   const limit = dashboard ? 5 : 10;
 
-  const { data, isLoading, isFetching, error } = useGetBookingsQuery({ page, limit });
+  const { data, isLoading, isFetching, error, refetch } = useGetBookingsQuery({ page, limit });
+
   const { data: bookedData } = useGetBookedBookingsQuery(
     editingAppointment?._id || ""
   );
@@ -65,6 +66,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
 
   const [createBooking] = useCreateBookingMutation();
   const [updateBooking] = useUpdateBookingMutation();
+
   const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
 
 
@@ -130,6 +132,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
         setServiceType("Pet Sitting");
         setFrequency("One-Time");
         toast.success("Booking updated successfully!");
+        await refetch();
       } else {
         await createBooking({
           startDate: selectedRange.startDate,
@@ -153,6 +156,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
         setFrequency("One-Time");
 
         toast.success("Booking request submitted successfully!");
+        await refetch();
       }
     } catch (error) {
       toast.error("Error processing booking");
@@ -168,6 +172,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
       try {
         await deleteBooking({ id: appointmentToDelete._id }).unwrap();
         toast.success("Booking deleted successfully!");
+        await refetch();
       } catch (error) {
         toast.error("Error deleting booking");
       }

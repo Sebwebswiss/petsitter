@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGetPetsStatsQuery } from "@/features/petsApi";
 import SelectDate from "./selectDate";
-import { useCreateBookingMutation } from "@/features/bookingApi";
+import {
+  useCreateBookingMutation,
+  useGetBookingsQuery,
+} from "@/features/bookingApi";
 import SelectTime from "./selectTime";
 import toast from "react-hot-toast";
-
 
 const services = [
   {
@@ -25,10 +27,13 @@ const services = [
     description: "Quick visit for feeding, playtime, and care updates.",
   },
 ];
+
 const AccountDashboard = () => {
   const [createBooking] = useCreateBookingMutation();
   const { data, isFetching, error } = useGetPetsStatsQuery("");
+  const { refetch } = useGetBookingsQuery({ page: 1, limit: 10 });
   const pets = data?.data;
+
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [serviceType, setServiceType] = useState("Pet Sitting");
@@ -61,22 +66,23 @@ const AccountDashboard = () => {
       toast.error("Please select a valid start and end time");
       return;
     }
-    // Validate that the selected date/time is in the future
     const newDateTimeString = `${formatDate(selectedDate)} ${selectedTime}`;
     const newDateTimeObj = new Date(newDateTimeString);
     if (newDateTimeObj <= new Date()) {
       toast.error("Booking time must be in the future");
       return;
     }
-    if (selectedRange.startDate === selectedRange.endDate) {
-      if (selectedTimeRange.startTime === selectedTimeRange.endTime) {
-        toast.error("Start and End Time Must Not Be Same")
-        return;
-      }
+    if (
+      selectedRange.startDate === selectedRange.endDate &&
+      selectedTimeRange.startTime === selectedTimeRange.endTime
+    ) {
+      toast.error("Start and End Time Must Not Be Same");
+      return;
     }
 
     setShowConfirmModal(true);
   };
+
   const confirmBookingRequest = async () => {
     try {
       await createBooking({
@@ -88,7 +94,6 @@ const AccountDashboard = () => {
         frequency,
       }).unwrap();
 
-      // Reset fields after booking
       setSelectedRange({
         startDate: "",
         endDate: "",
@@ -101,6 +106,7 @@ const AccountDashboard = () => {
       setFrequency("One-Time");
 
       toast.success("Booking request submitted successfully!");
+      await refetch();
     } catch (error) {
       toast.error("Error processing booking");
     }
@@ -108,8 +114,6 @@ const AccountDashboard = () => {
     setShowConfirmModal(false);
     setIsModalOpen(false);
   };
-
-
 
   if (!isFetching) {
     return (
@@ -155,9 +159,7 @@ const AccountDashboard = () => {
         )}
         {isModalOpen ? (
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">
-              Request a Booking
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Request a Booking</h3>
             <label className="block text-sm font-medium text-gray-700">
               Service Type
             </label>
@@ -166,10 +168,11 @@ const AccountDashboard = () => {
                 <div
                   key={service.id}
                   onClick={() => setServiceType(service.title)}
-                  className={`flex items-center p-4 border rounded-md cursor-pointer transition-colors ${serviceType === service.title
-                    ? "border-primary bg-gray-100"
-                    : "border-gray-300"
-                    }`}
+                  className={`flex items-center p-4 border rounded-md cursor-pointer transition-colors ${
+                    serviceType === service.title
+                      ? "border-primary bg-gray-100"
+                      : "border-gray-300"
+                  }`}
                 >
                   <div className="w-6 flex-shrink-0 flex justify-center items-center">
                     {serviceType === service.title ? (
@@ -196,7 +199,9 @@ const AccountDashboard = () => {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold">{service.title}</h3>
-                    <p className="text-sm text-gray-600">{service.description}</p>
+                    <p className="text-sm text-gray-600">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -215,7 +220,6 @@ const AccountDashboard = () => {
                 <span className="uppercase text-center font-extrabold text-2xl text-golden">
                   Select Timings
                 </span>
-
                 <SelectTime
                   selectedTimeRange={selectedTimeRange}
                   setSelectedTimeRange={setSelectedTimeRange}
@@ -280,9 +284,7 @@ const AccountDashboard = () => {
               <div className="flex bg-white rounded-lg shadow-md justify-between items-center">
                 <div className="flex flex-col items-center flex-1 p-3">
                   <p className="text-xl text-center">You have created</p>
-                  <p
-                    className="font-bold text-8xl text-center text-golden"
-                  >
+                  <p className="font-bold text-8xl text-center text-golden">
                     {pets?.cats}
                   </p>
                   <p className="text-xl text-center ">Cats Profiles</p>
@@ -308,17 +310,13 @@ const AccountDashboard = () => {
             </Link>
           </>
         )}
-
       </div>
     );
   } else if (isFetching) {
     return (
       <div className="flex w-[30%] mx-[35%] py-10">
         <div className="flex mx-auto h-[15rem] items-center justify-center">
-          <div
-            className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"
-          // style={{ borderColor: primaryBlueHexCode }}
-          ></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
         </div>
       </div>
     );
