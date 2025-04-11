@@ -102,7 +102,7 @@ const FAQSection: React.FC = () => {
           viewport={{ once: true, amount: 0.8 }}
           variants={sectionVariants}
         >
-          <Link href="/faqs" className="text-primary font-heading font-semibold text-left">See All &rarr;</Link>
+          <Link href="" className="text-primary font-heading font-semibold text-left">See All &rarr;</Link>
         </motion.div>
       </div>
     </div>
