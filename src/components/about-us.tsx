@@ -38,33 +38,28 @@ const AboutUs = () => {
   };
 
   return (
-    <div id="about" className="bg-black py-20 max-w-[100vw] overflow-x-hidden ">
+    <div id="about" className="bg-black py-20 max-w-[100vw] overflow-x-hidden">
       <motion.div
         className="max-w-[90%] lg:max-w-6xl 2xl:max-w-7xl mx-auto flex flex-col lg:flex-row items-center"
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.div
-          className="lg:w-1/2 "
-          variants={cardVariants}
-        >
+        <motion.div className="lg:w-1/2" variants={cardVariants}>
           <h2 className="text-3xl font-extrabold text-golden mb-4 font-heading">
             ABOUT US
           </h2>
-          <p className="text-md text-white mb-6 font-body  md:pr-16">
-          Trusted Pet Care in Boca Raton by Sebastien Services LLC
-
-At Pet Sitter Boca Raton by Sebastien Services LLC, your pets receive family-level treatment. Pet sitting, dog walking, feeding visits, and check-ins are options you can count on — 24/7 — anywhere in and around Boca Raton and within 30 miles to reach you.
-
-With years of experience and love for animals, our local staff makes sure your furry companions remain secure, well-looked-after and happy — EVEN when you are not there with them. Every service is fully adapted to your pet’s routine and comfort level with options like same-day bookings and overnight stays available.
-
-Making pet care simple: set up your account in seconds (Google sign-in option), book instantly online, and get instant email confirmations. Simple. Secure. Stress-free.
-
-New customers are more than welcome. Got questions? Just call on us — we'll glad to assist you!
+          <p className="text-md text-white mb-6 font-body md:pr-16">
+            <strong>Pet Sitter Sebastien Services LLC</strong> is your trusted local provider of professional pet care in Boca Raton, Florida, and surrounding areas within a 30-mile radius. We specialize in pet sitting, dog walking, daily check-ins, and feeding visits — all tailored to fit your schedule and your pet’s routine.
+            <br /><br />
+            As a registered and insured LLC, we are committed to providing safe, reliable, and loving care backed by years of experience and 24/7 availability. Whether you're at work, on vacation, or simply need a helping hand, you can count on us to treat your pets like family.
+            <br /><br />
+            We make booking simple with online reservations, instant confirmations, and even Google sign-in for fast access. Your peace of mind is our priority — and your pet’s happiness is our mission.
+            <br /><br />
+            Ready to meet your pet’s new best friend? Schedule your service today.
           </p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
-            <div className="">
+            <div>
               <Link href="/client/signup">
                 <Button value="Get Started" type="filled" navigate="services" />
               </Link>
