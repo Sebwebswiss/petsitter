@@ -73,7 +73,7 @@ const SignupPage: React.FC = () => {
     <div className="w-full lg:max-w-[400px] flex flex-col justify-center">
       <div className="w-full mx-auto flex flex-col items-center">
         <Link className="mb-3 inline-block" href="/">
-          <h1 className="text-3xl sm:text-4xl font-bold text-primary">Pet Sitter Boca</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-primary">Pet Sitter</h1>
         </Link>
   
         <h2 className="mb-4 text-lg sm:text-xl md:text-2xl font-bold font-heading text-white">

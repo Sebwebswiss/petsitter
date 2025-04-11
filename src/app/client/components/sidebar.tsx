@@ -68,7 +68,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center rounded-sm justify-center shadow-md flex-shrink-0 my-4">
           <Link href={"/"}>
-            <h1 className="text-3xl font-bold text-primary">Pet Sitter Boca</h1>
+            <h1 className="text-3xl font-bold text-primary">Pet Sitter</h1>
           </Link>
         </div>
         <nav className="flex-1 overflow-y-auto">

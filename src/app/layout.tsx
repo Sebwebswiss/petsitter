@@ -21,7 +21,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Pet Sitter Boca",
+  title: "Pet Sitter",
   description: "Best Pet Sitter in your Town",
 };
 
