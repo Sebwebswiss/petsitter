@@ -50,13 +50,14 @@ const AboutUs = () => {
             ABOUT US
           </h2>
           <p className="text-md text-white mb-6 font-body md:pr-16">
-            <strong>Pet Sitter Sebastien Services LLC</strong> is your trusted local provider of professional pet care in Boca Raton, Florida, and surrounding areas within a 30-mile radius. We specialize in pet sitting, dog walking, daily check-ins, and feeding visits — all tailored to fit your schedule and your pet’s routine.
-            <br /><br />
-            As a registered and insured LLC, we are committed to providing safe, reliable, and loving care backed by years of experience and 24/7 availability. Whether you're at work, on vacation, or simply need a helping hand, you can count on us to treat your pets like family.
-            <br /><br />
-            We make booking simple with online reservations, instant confirmations, and even Google sign-in for fast access. Your peace of mind is our priority — and your pet’s happiness is our mission.
-            <br /><br />
-            Ready to meet your pet’s new best friend? Schedule your service today.
+          Pet Sitter Sebastien Services LLC is your trusted local provider of professional pet care in Boca Raton, Florida, and surrounding areas within a 30-mile radius. We specialize in pet sitting, dog walking, daily check-ins, and feeding visits — all tailored to fit your schedule and your pet&rsquo;s routine.
+
+As a registered and insured LLC, we are committed to providing safe, reliable, and loving care backed by years of experience and 24/7 availability. Whether you&apos;re at work, on vacation, or simply need a helping hand, you can count on us to treat your pets like family.
+
+We make booking simple with online reservations, instant confirmations, and even Google sign-in for fast access. Your peace of mind is our priority — and your pet&rsquo;s happiness is our mission.
+
+Ready to meet your pet&rsquo;s new best friend? Schedule your service today.
+
           </p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
             <div>
