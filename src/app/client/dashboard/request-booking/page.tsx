@@ -1,14 +1,21 @@
 'use client';
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
+import AppointmentsTable from '../../components/appointments-table';
 import ClientDefaultLayout from '../../components/default-layout';
 import withAuthClient from '@/middleware/withAuthClient';
-import AppointmentsTable from '../../components/appointments-table';
 
 const Page = () => {
+  const [openBookingForm, setOpenBookingForm] = useState(false);
+
+  useEffect(() => {
+    // Automatski otvara formu odmah pri učitavanju
+    setOpenBookingForm(true);
+  }, []);
+
   return (
     <ClientDefaultLayout>
-      {/* Prikazuje formu odmah bez klika na dugme */}
-      <AppointmentsTable dashboard={false} />
+      <AppointmentsTable dashboard={false} forceOpenForm={openBookingForm} />
     </ClientDefaultLayout>
   );
 };
