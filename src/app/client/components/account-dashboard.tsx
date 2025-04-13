@@ -39,8 +39,8 @@ const AccountDashboard = () => {
   const [serviceType, setServiceType] = useState("Pet Sitting");
   const [frequency, setFrequency] = useState("One-Time");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedRange, setSelectedRange] = useState({
     startDate: "",
     endDate: "",
@@ -112,8 +112,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
       toast.error("Error processing booking");
     }
 
-    setPhoneNumber("");
-  setShowConfirmModal(false);
+    setShowConfirmModal(false);
     setIsModalOpen(false);
   };
 
@@ -134,10 +133,9 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
             }}
           >
             Request a Booking
-          </div>
+          </button>
         </div>
-        
-{showConfirmModal && (
+        {showConfirmModal && (
   <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
       <h3 className="text-xl font-bold mb-4">Confirm Booking Request</h3>
@@ -160,7 +158,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
           }}
         >
           Cancel
-        </div>
+        </button>
         <button
           className={`py-2 px-4 rounded transition text-white ${
             phoneNumber
@@ -171,12 +169,11 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
           disabled={!phoneNumber}
         >
           Confirm
-        </div>
+        </button>
       </div>
     </div>
   </div>
 )}
-
           </div>
         )}
         {isModalOpen ? (
@@ -270,17 +267,17 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                 }}
               >
                 Cancel
-              </div>
+              </button>
               <button
                 className="bg-golden text-white py-2 px-4 rounded transition"
                 onClick={handleRequestBooking}
               >
                 Request Booking
-              </div>
+              </button>
             </div>
           </div>
         ) : (
-          
+          <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="flex bg-white flex-col md:flex-row rounded-lg shadow-md justify-between items-center">
                 <div className="flex flex-col items-center flex-1 p-3">
@@ -292,7 +289,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                   <Link href="/client/dashboard/pets">
                     <button className="mt-4 bg-golden text-black text-sm rounded px-10 py-2 font-semibold hover:bg-[#001D3D]">
                       See all Dogs
-                    </div>
+                    </button>
                   </Link>
                 </div>
                 <Image
@@ -313,7 +310,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                   <Link href="/client/dashboard/pets">
                     <button className="mt-4 bg-golden text-black text-sm rounded px-10 py-2 font-semibold hover:bg-[#001D3D]">
                       See all Cats
-                    </div>
+                    </button>
                   </Link>
                 </div>
                 <Image
@@ -328,9 +325,9 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
             <Link href="/client/dashboard/pets">
               <button className="bg-golden text-black w-full text-sm rounded px-8 py-2 font-semibold hover:bg-[#001D3D]">
                 See all Pets
-              </div>
+              </button>
             </Link>
-          
+          </>
         )}
       </div>
     );

@@ -55,7 +55,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
   });
 
   const [phoneNumber, setPhoneNumber] = useState("");
-const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const limit = dashboard ? 5 : 10;
 
   const { data, isLoading, isFetching, error, refetch } = useGetBookingsQuery({ page, limit });
@@ -162,8 +162,7 @@ const [page, setPage] = useState(1);
     } catch (error) {
       toast.error("Error processing booking");
     }
-    setPhoneNumber("");
-  setShowConfirmModal(false);
+    setShowConfirmModal(false);
     setIsModalOpen(false);
     setShowScheduling(true);
     setEditingAppointment(null);
@@ -190,8 +189,7 @@ const [page, setPage] = useState(1);
 
   return (
     <div className="">
-      
-{showConfirmModal && (
+      {showConfirmModal && (
   <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
       <h3 className="text-xl font-bold mb-4">
@@ -218,7 +216,7 @@ const [page, setPage] = useState(1);
           }}
         >
           Cancel
-        </div>
+        </button>
         <button
           className={`py-2 px-4 rounded transition text-white ${
             phoneNumber
@@ -229,12 +227,11 @@ const [page, setPage] = useState(1);
           disabled={!phoneNumber}
         >
           Confirm
-        </div>
+        </button>
       </div>
     </div>
   </div>
 )}
-
         </div>
       )}
 
@@ -251,13 +248,13 @@ const [page, setPage] = useState(1);
                 onClick={() => setShowDeleteConfirmModal(false)}
               >
                 Cancel
-              </div>
+              </button>
               <button
                 className="bg-red-500 text-white py-2 px-4 rounded transition"
                 onClick={confirmDeleteBooking}
               >
                 Delete
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -357,17 +354,17 @@ const [page, setPage] = useState(1);
               }}
             >
               Cancel
-            </div>
+            </button>
             <button
               className="bg-golden text-white py-2 px-4 rounded transition"
               onClick={handleRequestBooking}
             >
               {editingAppointment ? "Update Booking" : "Request Booking"}
-            </div>
+            </button>
           </div>
         </div>
       ) : (
-        
+        <>
           <div className="md:hidden flex items-center justify-end mb-4">
 
             {!dashboard && (
@@ -383,7 +380,7 @@ const [page, setPage] = useState(1);
                 }}
               >
                 Request a Booking
-              </div>
+              </button>
             )}
           </div>
           <div className="overflow-x-auto">
@@ -405,7 +402,7 @@ const [page, setPage] = useState(1);
                     }}
                   >
                     Request a Booking
-                  </div>
+                  </button>
                 )}
               </div>
               {/* <div>
@@ -461,7 +458,7 @@ const [page, setPage] = useState(1);
                     }}
                   >
                     <FiEdit size={20} />
-                  </div>
+                  </button>
                   <button
                     className="text-red-500 hover:text-red-700"
                     onClick={() => {
@@ -471,7 +468,7 @@ const [page, setPage] = useState(1);
                     disabled={isDeleting}
                   >
                     <FiTrash2 size={20} />
-                  </div>
+                  </button>
                 </div>
               </div>
             ))}
@@ -532,7 +529,7 @@ const [page, setPage] = useState(1);
                             }}
                           >
                             <FiEdit size={20} />
-                          </div>
+                          </button>
                           <button
                             className="text-red-500 hover:text-red-700"
                             onClick={() => {
@@ -542,7 +539,7 @@ const [page, setPage] = useState(1);
                             disabled={isDeleting}
                           >
                             <FiTrash2 size={20} />
-                          </div>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -579,7 +576,7 @@ const [page, setPage] = useState(1);
                           }}
                         >
                           <FiEdit size={20} />
-                        </div>
+                        </button>
                         <button
                           className="text-red-500 hover:text-red-700"
                           onClick={() => {
@@ -589,7 +586,7 @@ const [page, setPage] = useState(1);
                           disabled={isDeleting}
                         >
                           <FiTrash2 size={20} />
-                        </div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -604,7 +601,7 @@ const [page, setPage] = useState(1);
 
             </div>
           </div>
-        
+        </>
       )}
     </div>
   );
