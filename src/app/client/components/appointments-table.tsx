@@ -405,7 +405,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                   </button>
                 )}
               </div>
-              {/* <div>
+              { <div>
             <div className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
               <div className="col-span-4 flex items-center min-w-[200px]">
                 <p className="font-bold">Service Name</p>
