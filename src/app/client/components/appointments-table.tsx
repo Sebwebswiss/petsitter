@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Key, useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import SelectDate from "./selectDate";
@@ -32,7 +33,14 @@ const services = [
   },
 ];
 
-const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
+const AppointmentsTable = ({
+  dashboard,
+  forceOpenForm = false,
+}: {
+  dashboard: boolean;
+  forceOpenForm?: boolean;
+}) => {
+
   // Local state for appointments and modal modes
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -58,6 +66,12 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
 
   const [page, setPage] = useState(1);
   const limit = dashboard ? 5 : 10;
+
+  useEffect(() => {
+    if (forceOpenForm) {
+      setIsModalOpen(true);
+    }
+  }, [forceOpenForm]);
 
   const { data, isLoading, isFetching, error } = useGetBookingsQuery({
     page,
