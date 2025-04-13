@@ -396,7 +396,7 @@ const AppointmentsTable = ({
                 <h4 className="text-2xl font-semibold text-black">
                   Your Bookings
                 </h4>
-                {!dashboard && (
+                {/* {!dashboard && (
                   <button
                     className="hidden md:flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
                     onClick={() => {
@@ -410,7 +410,7 @@ const AppointmentsTable = ({
                   >
                     Request a Booking
                   </button>
-                )}
+                )} */}
               </div>
 
               <div>
