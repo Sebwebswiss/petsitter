@@ -14,6 +14,7 @@ const testimonials = [
     name: "David G.",
     location: "Delray Beach",
     text: "My dog Max adores Sebastien! He gets so excited for his daily walks. I appreciate the reliable, on-time walks every weekday. I can tell Max is getting plenty of exercise and attention because he’s calmer and content when I get home. Highly recommend this service.",
+    image: "/images/testimonials/david.jpg",
   },
   {
     name: "Maria S.",
@@ -55,7 +56,7 @@ const Testimonials = () => {
           <div className="lg:flex lg:items-center lg:justify-between z-10">
             <div>
               <img
-                src={"/icons/testimonial.png"}
+                src={"/images/testimonials/david.jpg"}
                 alt={`efficient icon`}
                 className="h-16 w-16 mb-6"
               />
