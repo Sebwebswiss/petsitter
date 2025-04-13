@@ -112,18 +112,18 @@ const AccountDashboard = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between py-6 xl:px-7.5 gap-4 md:gap-0">
           <h2 className="text-2xl font-semibold">Dashboard</h2>
           <button
-            className="w-full md:w-auto flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
-            type="button"
-            onClick={() => {
-              setServiceType("Pet Sitting");
-              setFrequency("One-Time");
-              setSelectedDate(new Date());
-              setSelectedTime(null);
-              setIsModalOpen(true);
-            }}
-          >
-            Request a Booking
-          </button>
+                className="flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
+                onClick={() => {
+                  setEditingAppointment(null);
+                  setServiceType("Pet Sitting");
+                  setFrequency("One-Time");
+                  setSelectedDate(new Date());
+                  setSelectedTime(null);
+                  setIsModalOpen(true);
+                }}
+              >
+                Request a Booking
+              </button>
         </div>
         {showConfirmModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
