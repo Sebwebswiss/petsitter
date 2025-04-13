@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Key, useState } from "react";
+import { useState, useEffect } from "react"; // samo jednom importiraj useState i useEffect
+import { Key } from "react"; // ovdje samo Key
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import SelectDate from "./selectDate";
 import SelectTime from "./selectTime";
