@@ -277,7 +277,7 @@ const AccountDashboard = () => {
             </div>
           </div>
         ) : (
-          <>
+          <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="flex bg-white flex-col md:flex-row rounded-lg shadow-md justify-between items-center">
                 <div className="flex flex-col items-center flex-1 p-3">
@@ -327,7 +327,7 @@ const AccountDashboard = () => {
                 See all Pets
               </button>
             </Link>
-          </>
+          </div>
         )}
       </div>
     );
