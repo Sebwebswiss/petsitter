@@ -330,7 +330,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                 See all Pets
               </button>
             </Link>
-          </>
+          
         )}
       </div>
     );
