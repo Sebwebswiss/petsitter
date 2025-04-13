@@ -54,12 +54,10 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
     endTime: "",
   });
 
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [page, setPage] = useState(1);
   const limit = dashboard ? 5 : 10;
 
-  const { data, isLoading, isFetching, error, refetch } = useGetBookingsQuery({ page, limit });
-
+  const { data, isLoading, isFetching, error } = useGetBookingsQuery({ page, limit });
   const { data: bookedData } = useGetBookedBookingsQuery(
     editingAppointment?._id || ""
   );
@@ -67,7 +65,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
 
   const [createBooking] = useCreateBookingMutation();
   const [updateBooking] = useUpdateBookingMutation();
-
   const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
 
 
@@ -133,7 +130,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
         setServiceType("Pet Sitting");
         setFrequency("One-Time");
         toast.success("Booking updated successfully!");
-        await refetch();
       } else {
         await createBooking({
           startDate: selectedRange.startDate,
@@ -157,7 +153,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
         setFrequency("One-Time");
 
         toast.success("Booking request submitted successfully!");
-        await refetch();
       }
     } catch (error) {
       toast.error("Error processing booking");
@@ -173,7 +168,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
       try {
         await deleteBooking({ id: appointmentToDelete._id }).unwrap();
         toast.success("Booking deleted successfully!");
-        await refetch();
       } catch (error) {
         toast.error("Error deleting booking");
       }
@@ -190,48 +184,31 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
   return (
     <div className="">
       {showConfirmModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-      <h3 className="text-xl font-bold mb-4">
-        {editingAppointment ? "Confirm Update" : "Confirm Booking Request"}
-      </h3>
-      <p className="text-sm text-gray-600 mb-4">
-        {editingAppointment
-          ? "This will update your booking details. Please confirm to proceed."
-          : "Please enter your phone number to confirm this booking request."}
-      </p>
-      <input
-        type="tel"
-        placeholder="Enter your phone number"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        className="w-full border border-gray-300 p-2 rounded mb-4"
-      />
-      <div className="flex justify-end space-x-4">
-        <button
-          className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
-          onClick={() => {
-            setShowConfirmModal(false);
-            setPhoneNumber("");
-          }}
-        >
-          Cancel
-        </button>
-        <button
-          className={`py-2 px-4 rounded transition text-white ${
-            phoneNumber
-              ? "bg-golden hover:bg-yellow-600"
-              : "bg-gray-300 cursor-not-allowed"
-          }`}
-          onClick={confirmBookingRequest}
-          disabled={!phoneNumber}
-        >
-          Confirm
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 className="text-xl font-bold mb-4">
+              {editingAppointment ? "Confirm Update" : "Confirm Booking Request"}
+            </h3>
+            <p className="text-sm text-gray-600 mb-6">
+              {editingAppointment
+                ? "This will update your booking details. Please confirm to proceed."
+                : "This is a booking request, not a confirmed booking. We will contact you to confirm the booking and arrange payment details. Please confirm to proceed."}
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
+                onClick={() => setShowConfirmModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-golden text-white py-2 px-4 rounded transition"
+                onClick={confirmBookingRequest}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -405,7 +382,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                   </button>
                 )}
               </div>
-              { <div>
+              {/* <div>
             <div className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
               <div className="col-span-4 flex items-center min-w-[200px]">
                 <p className="font-bold">Service Name</p>
