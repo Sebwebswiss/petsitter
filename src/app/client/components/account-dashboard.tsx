@@ -39,7 +39,8 @@ const AccountDashboard = () => {
   const [serviceType, setServiceType] = useState("Pet Sitting");
   const [frequency, setFrequency] = useState("One-Time");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedRange, setSelectedRange] = useState({
     startDate: "",
     endDate: "",
@@ -111,7 +112,8 @@ const AccountDashboard = () => {
       toast.error("Error processing booking");
     }
 
-    setShowConfirmModal(false);
+    setPhoneNumber("");
+  setShowConfirmModal(false);
     setIsModalOpen(false);
   };
 
@@ -134,27 +136,47 @@ const AccountDashboard = () => {
             Request a Booking
           </button>
         </div>
-        {showConfirmModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-              <h3 className="text-xl font-bold mb-4">
-                Confirm Booking Request
-              </h3>
-              <div className="flex justify-end space-x-4">
-                <button
-                  className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
-                  onClick={() => setShowConfirmModal(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="bg-golden text-white py-2 px-4 rounded transition"
-                  onClick={confirmBookingRequest}
-                >
-                  Confirm
-                </button>
-              </div>
-            </div>
+        
+{showConfirmModal && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+      <h3 className="text-xl font-bold mb-4">Confirm Booking Request</h3>
+      <p className="text-sm text-gray-600 mb-4">
+        Please enter your phone number to confirm the booking.
+      </p>
+      <input
+        type="tel"
+        placeholder="Enter your phone number"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        className="w-full border border-gray-300 p-2 rounded mb-4"
+      />
+      <div className="flex justify-end space-x-4">
+        <button
+          className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
+          onClick={() => {
+            setShowConfirmModal(false);
+            setPhoneNumber("");
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          className={`py-2 px-4 rounded transition text-white ${
+            phoneNumber
+              ? "bg-golden hover:bg-yellow-600"
+              : "bg-gray-300 cursor-not-allowed"
+          }`}
+          onClick={confirmBookingRequest}
+          disabled={!phoneNumber}
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
           </div>
         )}
         {isModalOpen ? (
