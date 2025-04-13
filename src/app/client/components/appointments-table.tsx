@@ -218,7 +218,7 @@ const [page, setPage] = useState(1);
           }}
         >
           Cancel
-        </button>
+        </div>
         <button
           className={`py-2 px-4 rounded transition text-white ${
             phoneNumber
@@ -229,7 +229,7 @@ const [page, setPage] = useState(1);
           disabled={!phoneNumber}
         >
           Confirm
-        </button>
+        </div>
       </div>
     </div>
   </div>
@@ -251,13 +251,13 @@ const [page, setPage] = useState(1);
                 onClick={() => setShowDeleteConfirmModal(false)}
               >
                 Cancel
-              </button>
+              </div>
               <button
                 className="bg-red-500 text-white py-2 px-4 rounded transition"
                 onClick={confirmDeleteBooking}
               >
                 Delete
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -357,13 +357,13 @@ const [page, setPage] = useState(1);
               }}
             >
               Cancel
-            </button>
+            </div>
             <button
               className="bg-golden text-white py-2 px-4 rounded transition"
               onClick={handleRequestBooking}
             >
               {editingAppointment ? "Update Booking" : "Request Booking"}
-            </button>
+            </div>
           </div>
         </div>
       ) : (
@@ -383,7 +383,7 @@ const [page, setPage] = useState(1);
                 }}
               >
                 Request a Booking
-              </button>
+              </div>
             )}
           </div>
           <div className="overflow-x-auto">
@@ -405,7 +405,7 @@ const [page, setPage] = useState(1);
                     }}
                   >
                     Request a Booking
-                  </button>
+                  </div>
                 )}
               </div>
               {/* <div>
@@ -461,7 +461,7 @@ const [page, setPage] = useState(1);
                     }}
                   >
                     <FiEdit size={20} />
-                  </button>
+                  </div>
                   <button
                     className="text-red-500 hover:text-red-700"
                     onClick={() => {
@@ -471,7 +471,7 @@ const [page, setPage] = useState(1);
                     disabled={isDeleting}
                   >
                     <FiTrash2 size={20} />
-                  </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -532,7 +532,7 @@ const [page, setPage] = useState(1);
                             }}
                           >
                             <FiEdit size={20} />
-                          </button>
+                          </div>
                           <button
                             className="text-red-500 hover:text-red-700"
                             onClick={() => {
@@ -542,7 +542,7 @@ const [page, setPage] = useState(1);
                             disabled={isDeleting}
                           >
                             <FiTrash2 size={20} />
-                          </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -579,7 +579,7 @@ const [page, setPage] = useState(1);
                           }}
                         >
                           <FiEdit size={20} />
-                        </button>
+                        </div>
                         <button
                           className="text-red-500 hover:text-red-700"
                           onClick={() => {
@@ -589,7 +589,7 @@ const [page, setPage] = useState(1);
                           disabled={isDeleting}
                         >
                           <FiTrash2 size={20} />
-                        </button>
+                        </div>
                       </div>
                     </div>
                   </div>

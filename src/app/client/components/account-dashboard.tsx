@@ -134,7 +134,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
             }}
           >
             Request a Booking
-          </button>
+          </div>
         </div>
         
 {showConfirmModal && (
@@ -160,7 +160,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
           }}
         >
           Cancel
-        </button>
+        </div>
         <button
           className={`py-2 px-4 rounded transition text-white ${
             phoneNumber
@@ -171,7 +171,7 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
           disabled={!phoneNumber}
         >
           Confirm
-        </button>
+        </div>
       </div>
     </div>
   </div>
@@ -270,13 +270,13 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                 }}
               >
                 Cancel
-              </button>
+              </div>
               <button
                 className="bg-golden text-white py-2 px-4 rounded transition"
                 onClick={handleRequestBooking}
               >
                 Request Booking
-              </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -289,10 +289,10 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                     {pets?.dogs}
                   </p>
                   <p className="text-xl text-center ">Dogs Profiles</p>
-                  <Link legacyBehavior href="/client/dashboard/pets">
+                  <Link href="/client/dashboard/pets">
                     <button className="mt-4 bg-golden text-black text-sm rounded px-10 py-2 font-semibold hover:bg-[#001D3D]">
                       See all Dogs
-                    </button>
+                    </div>
                   </Link>
                 </div>
                 <Image
@@ -310,10 +310,10 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                     {pets?.cats}
                   </p>
                   <p className="text-xl text-center ">Cats Profiles</p>
-                  <Link legacyBehavior href="/client/dashboard/pets">
+                  <Link href="/client/dashboard/pets">
                     <button className="mt-4 bg-golden text-black text-sm rounded px-10 py-2 font-semibold hover:bg-[#001D3D]">
                       See all Cats
-                    </button>
+                    </div>
                   </Link>
                 </div>
                 <Image
@@ -325,10 +325,10 @@ const [showConfirmModal, setShowConfirmModal] = useState(false);
                 />
               </div>
             </div>
-            <Link legacyBehavior href="/client/dashboard/pets">
+            <Link href="/client/dashboard/pets">
               <button className="bg-golden text-black w-full text-sm rounded px-8 py-2 font-semibold hover:bg-[#001D3D]">
                 See all Pets
-              </button>
+              </div>
             </Link>
           
         )}
