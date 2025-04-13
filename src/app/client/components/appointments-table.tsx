@@ -3,26 +3,6 @@ import { Key, useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import SelectDate from "./selectDate";
 import SelectTime from "./selectTime";
-import toast from "react-hot-toast";
-import {
-  useCreateBookingMutation,
-  useUpdateBookingMutation,
-  useDeleteBookingMutation,
-  useGetBookingsQuery,
-  useGetBookedBookingsQuery,
-} from "@/features/bookingApi";
-import Loader from "@/components/loader";
-import { format } from "date-fns";
-
-const services = [
-  {
-    id: "pet-sitting",
-    title: "Pet Sitting",
-    description: "Pro"use client";
-import { Key, useState } from "react";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
-import SelectDate from "./selectDate";
-import SelectTime from "./selectTime";
 import toast, { Toaster } from "react-hot-toast";
 import {
   useCreateBookingMutation,
@@ -402,7 +382,79 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                   </button>
                 )}
               </div>
-              
+              {/* <div>
+            <div className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
+              <div className="col-span-4 flex items-center min-w-[200px]">
+                <p className="font-bold">Service Name</p>
+              </div>
+              <div className="col-span-4 flex items-center min-w-[150px]">
+                <p className="font-medium">Timings</p>
+              </div>
+              <div className="col-span-2 flex items-center min-w-[150px]">
+                <p className="font-medium">Frequency</p>
+              </div>
+              <div className="col-span-2 flex items-center justify-center min-w-[100px]">
+                <p className="font-medium">Actions</p>
+              </div>
+            </div>
+            {data?.data?.map((appointment:any, key: Key) => (
+              <div
+                className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7"
+                key={key}
+              >
+                <div className="col-span-4">
+                  <p className="text-md font-bold">
+                    {appointment.servicetype}
+                  </p>
+                </div>
+                <div className="col-span-4 flex items-center">
+                  <p className="text-sm">{format(appointment.startDate, "yyyy-MM-dd")} {(appointment.startTime)} - {format(appointment.endDate, "yyyy-MM-dd")} {(appointment?.endTime)}</p>
+                </div>
+                <div className="col-span-2 flex items-center">
+                  <p className="text-sm text-meta-3">{appointment.frequency}</p>
+                </div>
+                <div className="col-span-2 flex justify-center items-center space-x-3">
+                  <button
+                    className="text-blue-500 hover:text-blue-700"
+                    onClick={() => {
+                      // Set edit mode with appointment data
+                      setEditingAppointment(appointment);
+                      setServiceType(appointment.servicetype);
+                      setFrequency(appointment.frequency);
+                      setSelectedRange({
+                        startDate: appointment.startDate,
+                        endDate: appointment.endDate
+                      })
+                    
+                      setSelectedTimeRange({
+                        startTime: appointment.startTime,
+                        endTime: appointment.endTime
+                      })
+                    
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    <FiEdit size={20} />
+                  </button>
+                  <button
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => {
+                      setAppointmentToDelete(appointment);
+                      setShowDeleteConfirmModal(true);
+                    }}
+                    disabled={isDeleting}
+                  >
+                    <FiTrash2 size={20} />
+                  </button>
+                </div>
+              </div>
+            ))}
+            {(data?.data?.length === 0 || !data) && (
+              <div className="text-black py-4 text-sm text-center bg-white border">
+                No Bookings Right Now!
+              </div>
+            )}
+          </div> */}
               <div>
                 {/* Desktop header (hidden on mobile) */}
                 <div className="hidden md:grid md:grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
@@ -530,162 +582,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
       )}
     </div>
   );
-};
-
-export default AppointmentsTable;fessional pet care while you're away.",
-  },
-  {
-    id: "dog-walking",
-    title: "Dog Walking",
-    description: "Daily walks for your furry friend.",
-  },
-  {
-    id: "drop-in-visit",
-    title: "Drop In Visit",
-    description: "Quick visit for feeding, playtime, and care updates.",
-  },
-];
-
-const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [serviceType, setServiceType] = useState("Pet Sitting");
-  const [frequency, setFrequency] = useState("One-Time");
-  const [showScheduling, setShowScheduling] = useState(false);
-  const [editingAppointment, setEditingAppointment] = useState<any>(null);
-  const [appointmentToDelete, setAppointmentToDelete] = useState<any>(null);
-  const [selectedRange, setSelectedRange] = useState({ startDate: "", endDate: "" });
-  const [selectedTimeRange, setSelectedTimeRange] = useState({ startTime: "", endTime: "" });
-  const [phone, setPhone] = useState("");
-  const isPhoneValid = /^\d{10,}$/.test(phone);
-
-  const [page, setPage] = useState(1);
-  const limit = dashboard ? 5 : 10;
-
-  const { data, isLoading, isFetching, error } = useGetBookingsQuery({ page, limit });
-  const { data: bookedData } = useGetBookedBookingsQuery(editingAppointment?._id || "");
-
-  const [createBooking] = useCreateBookingMutation();
-  const [updateBooking] = useUpdateBookingMutation();
-  const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
-
-  const formatDate = (date: Date | null) => {
-    if (!date) return "Date";
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
-  const handleRequestBooking = () => {
-    if (!selectedRange.startDate || !selectedRange.endDate) {
-      toast.error("Please select a valid start and end date");
-      return;
-    }
-    if (!selectedTimeRange.startTime || !selectedTimeRange.endTime) {
-      toast.error("Please select a valid start and end time");
-      return;
-    }
-    const newDateTimeString = `${formatDate(selectedDate)} ${selectedTime}`;
-    const newDateTimeObj = new Date(newDateTimeString);
-    if (newDateTimeObj <= new Date()) {
-      toast.error("Booking time must be in the future");
-      return;
-    }
-    if (
-      selectedRange.startDate === selectedRange.endDate &&
-      selectedTimeRange.startTime === selectedTimeRange.endTime
-    ) {
-      toast.error("Start and End Time Must Not Be Same");
-      return;
-    }
-    setShowConfirmModal(true);
-  };
-
-  const confirmBookingRequest = async () => {
-    try {
-      if (editingAppointment) {
-        await updateBooking({
-          id: editingAppointment._id,
-          startDate: selectedRange.startDate,
-          endDate: selectedRange.endDate,
-          startTime: selectedTimeRange.startTime,
-          endTime: selectedTimeRange.endTime,
-          servicetype: serviceType,
-          frequency,
-          phone,
-        }).unwrap();
-        toast.success("Booking updated successfully!");
-      } else {
-        await createBooking({
-          startDate: selectedRange.startDate,
-          endDate: selectedRange.endDate,
-          startTime: selectedTimeRange.startTime,
-          endTime: selectedTimeRange.endTime,
-          servicetype: serviceType,
-          frequency,
-          phone,
-        }).unwrap();
-        toast.success("Booking request submitted successfully!");
-      }
-
-      setSelectedRange({ startDate: "", endDate: "" });
-      setSelectedTimeRange({ startTime: "00:00", endTime: "00:00" });
-      setServiceType("Pet Sitting");
-      setFrequency("One-Time");
-      setPhone("");
-      setEditingAppointment(null);
-    } catch (error) {
-      toast.error("Error processing booking");
-    }
-    setShowConfirmModal(false);
-    setIsModalOpen(false);
-    setShowScheduling(true);
-  };
-
-  const renderConfirmModal = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h3 className="text-xl font-bold mb-4">
-          {editingAppointment ? "Confirm Update" : "Confirm Booking Request"}
-        </h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Please confirm and enter your phone number.
-        </p>
-        <input
-          type="tel"
-          placeholder="Enter your phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2 w-full mb-4"
-        />
-        <div className="flex justify-end space-x-4">
-          <button
-            className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
-            onClick={() => setShowConfirmModal(false)}
-          >
-            Cancel
-          </button>
-          <button
-            className={`py-2 px-4 rounded transition ${
-              isPhoneValid
-                ? "bg-golden text-white hover:bg-yellow-500"
-                : "bg-yellow-200 text-gray-400 cursor-not-allowed"
-            }`}
-            onClick={confirmBookingRequest}
-            disabled={!isPhoneValid}
-          >
-            Confirm
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  return <div className="">{showConfirmModal && renderConfirmModal()}</div>;
 };
 
 export default AppointmentsTable;
