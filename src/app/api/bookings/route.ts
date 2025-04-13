@@ -68,6 +68,8 @@ const createBookingHandler = async (request: NextRequest) => {
       <p><strong>End:</strong> ${req.endDate} at ${req.endTime}</p>
       <p><strong>Frequency:</strong> ${req.frequency}</p>
       <p><strong>User:</strong> ${user.firstName} (${user.email})</p>
+      <p><strong>Phone:</strong> ${req.phone}</p>
+
     `;
 
     const mailToOwner = {
