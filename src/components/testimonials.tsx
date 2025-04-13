@@ -9,6 +9,7 @@ const testimonials = [
     name: "Jessica L.",
     location: "Boca Raton",
     text: "Absolutely fantastic service! Sebastien took such great care of our two cats while we were on vacation. We got daily updates and photos, and came home to relaxed, happy kitties. We will definitely use his pet sitting again!",
+    image: "/images/testimonials/jesica.jpg",
   },
   {
     name: "David G.",
@@ -20,6 +21,7 @@ const testimonials = [
     name: "Maria S.",
     location: "Deerfield Beach",
     text: "I was nervous about leaving our new rescue pup for the first time, but this service was a game-changer. Sebastien is patient and so good with animals - he even managed our pup's medication and anxiety with ease. We got updates every visit. Truly a five-star experience from start to finish.",
+    image: "/images/testimonials/maria.jpg",
   },
 ];
 
