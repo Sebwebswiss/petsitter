@@ -112,18 +112,86 @@ const AccountDashboard = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between py-6 xl:px-7.5 gap-4 md:gap-0">
           <h2 className="text-2xl font-semibold">Dashboard</h2>
           <button
-                className="flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
-                onClick={() => {
-                  setEditingAppointment(null);
-                  setServiceType("Pet Sitting");
-                  setFrequency("One-Time");
-                  setSelectedDate(new Date());
-                  setSelectedTime(null);
-                  setIsModalOpen(true);
-                }}
+            className="w-full md:w-auto flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
+            type="button"
+            onClick={() => {
+              setServiceType("Pet Sitting");
+              setFrequency("One-Time");
+              setSelectedDate(new Date());
+              setSelectedTime(null);
+              setIsModalOpen(true);
+            }}
+          >
+            Request a Booking
+          </button>
+          {isModalOpen && (
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-auto mt-10">
+          <h3 className="text-xl font-bold mb-4">Request a Booking</h3>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Service Type
+          </label>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                onClick={() => setServiceType(service.title)}
+                className={`p-4 border rounded cursor-pointer ${
+                  serviceType === service.title
+                    ? "border-primary bg-gray-100"
+                    : "border-gray-300"
+                }`}
               >
-                Request a Booking
-              </button>
+                <h4 className="font-semibold">{service.title}</h4>
+                <p className="text-sm text-gray-600">{service.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 mb-4">
+            <SelectDate
+              selectedRange={selectedRange}
+              setSelectedRange={setSelectedRange}
+              bookedData={[]} // Ako imaš podatke, stavi bookedData
+            />
+            <SelectTime
+              selectedTimeRange={selectedTimeRange}
+              setSelectedTimeRange={setSelectedTimeRange}
+              selectedDate={selectedRange}
+              bookedData={[]}
+            />
+          </div>
+
+          <label className="block text-sm font-medium text-gray-700 mt-4">
+            Frequency
+          </label>
+          <select
+            className="w-full mt-1 border border-gray-300 p-2 rounded"
+            value={frequency}
+            onChange={(e) => setFrequency(e.target.value)}
+          >
+            <option value="One-Time">One-Time</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Every Other Day">Every Other Day</option>
+          </select>
+
+          <div className="flex justify-end gap-4 mt-6">
+            <button
+              className="bg-gray-400 text-white py-2 px-4 rounded"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-golden text-white py-2 px-4 rounded"
+              onClick={handleRequestBooking}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
         </div>
         {showConfirmModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
