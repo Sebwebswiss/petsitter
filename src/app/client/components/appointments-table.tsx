@@ -189,15 +189,15 @@ const [page, setPage] = useState(1);
 
 
   return (
-    <div className=""><a>
+    <div className="">
       
 {showConfirmModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"><a>
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"><a>
-      <h3 className="text-xl font-bold mb-4"><a>
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+      <h3 className="text-xl font-bold mb-4">
         {editingAppointment ? "Confirm Update" : "Confirm Booking Request"}
       </h3>
-      <p className="text-sm text-gray-600 mb-4"><a>
+      <p className="text-sm text-gray-600 mb-4">
         {editingAppointment
           ? "This will update your booking details. Please confirm to proceed."
           : "Please enter your phone number to confirm this booking request."}
@@ -209,7 +209,7 @@ const [page, setPage] = useState(1);
         onChange={(e) => setPhoneNumber(e.target.value)}
         className="w-full border border-gray-300 p-2 rounded mb-4"
       />
-      <div className="flex justify-end space-x-4"><a>
+      <div className="flex justify-end space-x-4">
         <button
           className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
           onClick={() => {
@@ -239,13 +239,13 @@ const [page, setPage] = useState(1);
       )}
 
       {showDeleteConfirmModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"><a>
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"><a>
-            <h3 className="text-xl font-bold mb-4"><a>Confirm Deletion</h3>
-            <p className="text-sm text-gray-600 mb-6"><a>
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 className="text-xl font-bold mb-4">Confirm Deletion</h3>
+            <p className="text-sm text-gray-600 mb-6">
               Are you sure you want to delete this booking?
             </p>
-            <div className="flex justify-end space-x-4"><a>
+            <div className="flex justify-end space-x-4">
               <button
                 className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
                 onClick={() => setShowDeleteConfirmModal(false)}
@@ -264,14 +264,14 @@ const [page, setPage] = useState(1);
       )}
 
       {isModalOpen ? (
-        <div className="bg-white p-6 rounded-lg shadow-lg"><a>
-          <h3 className="text-xl font-bold mb-4"><a>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h3 className="text-xl font-bold mb-4">
             {editingAppointment ? "Edit Booking" : "Request a Booking"}
           </h3>
-          <label className="block text-sm font-medium text-gray-700"><a>
+          <label className="block text-sm font-medium text-gray-700">
             Service Type
           </label>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2"><a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
             {services.map((service) => (
               <div
                 key={service.id}
@@ -281,7 +281,7 @@ const [page, setPage] = useState(1);
                   : "border-gray-300"
                   }`}
               >
-                <div className="w-6 flex-shrink-0 flex justify-center items-center"><a>
+                <div className="w-6 flex-shrink-0 flex justify-center items-center">
                   {serviceType === service.title ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -304,16 +304,16 @@ const [page, setPage] = useState(1);
                     </svg>
                   )}
                 </div>
-                <div className="ml-4"><a>
-                  <h3 className="text-lg font-semibold"><a>{service.title}</h3>
-                  <p className="text-sm text-gray-600"><a>{service.description}</p>
+                <div className="ml-4">
+                  <h3 className="text-lg font-semibold">{service.title}</h3>
+                  <p className="text-sm text-gray-600">{service.description}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="md:space-x-10 flex flex-col md:flex-row justify-center mx-auto py-4 md:py-8 font-sans"><a>
-            <div className="flex flex-col items-center"><a>
-              <span className="uppercase text-center font-extrabold text-2xl text-golden"><a>
+          <div className="md:space-x-10 flex flex-col md:flex-row justify-center mx-auto py-4 md:py-8 font-sans">
+            <div className="flex flex-col items-center">
+              <span className="uppercase text-center font-extrabold text-2xl text-golden">
                 Select Dates
               </span>
               <SelectDate
@@ -322,8 +322,8 @@ const [page, setPage] = useState(1);
                 setSelectedRange={setSelectedRange}
               />
             </div>
-            <div className="md:w-[40%] flex flex-col items-center"><a>
-              <span className="uppercase text-center font-extrabold text-2xl text-golden"><a>
+            <div className="md:w-[40%] flex flex-col items-center">
+              <span className="uppercase text-center font-extrabold text-2xl text-golden">
                 Select Timings
               </span>
 
@@ -335,7 +335,7 @@ const [page, setPage] = useState(1);
               />
             </div>
           </div>
-          <label className="block text-sm font-medium text-gray-700"><a>
+          <label className="block text-sm font-medium text-gray-700">
             Frequency
           </label>
           <select
@@ -343,12 +343,12 @@ const [page, setPage] = useState(1);
             value={frequency}
             onChange={(e) => setFrequency(e.target.value)}
           >
-            <option value="One-Time"><a>One-Time</option>
-            <option value="Daily"><a>Daily</option>
-            <option value="Weekly"><a>Weekly</option>
-            <option value="Every Other Day"><a>Every Other Day</option>
+            <option value="One-Time">One-Time</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Every Other Day">Every Other Day</option>
           </select>
-          <div className="flex justify-between mt-6"><a>
+          <div className="flex justify-between mt-6">
             <button
               className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
               onClick={() => {
@@ -368,7 +368,7 @@ const [page, setPage] = useState(1);
         </div>
       ) : (
         
-          <div className="md:hidden flex items-center justify-end mb-4"><a>
+          <div className="md:hidden flex items-center justify-end mb-4">
 
             {!dashboard && (
               <button
@@ -386,10 +386,10 @@ const [page, setPage] = useState(1);
               </button>
             )}
           </div>
-          <div className="overflow-x-auto"><a>
-            <div className="rounded-sm border border-stroke bg-white shadow-default min-w-max "><a>
-              <div className="flex items-center justify-between px-4 py-6 md:px-6 xl:px-7.5"><a>
-                <h4 className="text-2xl font-semibold text-black"><a>
+          <div className="overflow-x-auto">
+            <div className="rounded-sm border border-stroke bg-white shadow-default min-w-max ">
+              <div className="flex items-center justify-between px-4 py-6 md:px-6 xl:px-7.5">
+                <h4 className="text-2xl font-semibold text-black">
                   Your Bookings
                 </h4>
                 {!dashboard && (
@@ -409,18 +409,18 @@ const [page, setPage] = useState(1);
                 )}
               </div>
               {/* <div>
-            <div className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black"><a>
-              <div className="col-span-4 flex items-center min-w-[200px]"><a>
-                <p className="font-bold"><a>Service Name</p>
+            <div className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
+              <div className="col-span-4 flex items-center min-w-[200px]">
+                <p className="font-bold">Service Name</p>
               </div>
-              <div className="col-span-4 flex items-center min-w-[150px]"><a>
-                <p className="font-medium"><a>Timings</p>
+              <div className="col-span-4 flex items-center min-w-[150px]">
+                <p className="font-medium">Timings</p>
               </div>
-              <div className="col-span-2 flex items-center min-w-[150px]"><a>
-                <p className="font-medium"><a>Frequency</p>
+              <div className="col-span-2 flex items-center min-w-[150px]">
+                <p className="font-medium">Frequency</p>
               </div>
-              <div className="col-span-2 flex items-center justify-center min-w-[100px]"><a>
-                <p className="font-medium"><a>Actions</p>
+              <div className="col-span-2 flex items-center justify-center min-w-[100px]">
+                <p className="font-medium">Actions</p>
               </div>
             </div>
             {data?.data?.map((appointment:any, key: Key) => (
@@ -428,18 +428,18 @@ const [page, setPage] = useState(1);
                 className="grid grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7"
                 key={key}
               >
-                <div className="col-span-4"><a>
-                  <p className="text-md font-bold"><a>
+                <div className="col-span-4">
+                  <p className="text-md font-bold">
                     {appointment.servicetype}
                   </p>
                 </div>
-                <div className="col-span-4 flex items-center"><a>
-                  <p className="text-sm"><a>{format(appointment.startDate, "yyyy-MM-dd")} {(appointment.startTime)} - {format(appointment.endDate, "yyyy-MM-dd")} {(appointment?.endTime)}</p>
+                <div className="col-span-4 flex items-center">
+                  <p className="text-sm">{format(appointment.startDate, "yyyy-MM-dd")} {(appointment.startTime)} - {format(appointment.endDate, "yyyy-MM-dd")} {(appointment?.endTime)}</p>
                 </div>
-                <div className="col-span-2 flex items-center"><a>
-                  <p className="text-sm text-meta-3"><a>{appointment.frequency}</p>
+                <div className="col-span-2 flex items-center">
+                  <p className="text-sm text-meta-3">{appointment.frequency}</p>
                 </div>
-                <div className="col-span-2 flex justify-center items-center space-x-3"><a>
+                <div className="col-span-2 flex justify-center items-center space-x-3">
                   <button
                     className="text-blue-500 hover:text-blue-700"
                     onClick={() => {
@@ -476,44 +476,44 @@ const [page, setPage] = useState(1);
               </div>
             ))}
             {(data?.data?.length === 0 || !data) && (
-              <div className="text-black py-4 text-sm text-center bg-white border"><a>
+              <div className="text-black py-4 text-sm text-center bg-white border">
                 No Bookings Right Now!
               </div>
             )}
           </div> */}
               <div>
                 {/* Desktop header (hidden on mobile) */}
-                <div className="hidden md:grid md:grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black"><a>
-                  <div className="col-span-4 flex items-center min-w-[200px]"><a>
-                    <p className="font-bold"><a>Service Name</p>
+                <div className="hidden md:grid md:grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
+                  <div className="col-span-4 flex items-center min-w-[200px]">
+                    <p className="font-bold">Service Name</p>
                   </div>
-                  <div className="col-span-4 flex items-center min-w-[150px]"><a>
-                    <p className="font-medium"><a>Timings</p>
+                  <div className="col-span-4 flex items-center min-w-[150px]">
+                    <p className="font-medium">Timings</p>
                   </div>
-                  <div className="col-span-2 flex items-center min-w-[150px]"><a>
-                    <p className="font-medium"><a>Frequency</p>
+                  <div className="col-span-2 flex items-center min-w-[150px]">
+                    <p className="font-medium">Frequency</p>
                   </div>
-                  <div className="col-span-2 flex items-center justify-center min-w-[100px]"><a>
-                    <p className="font-medium"><a>Actions</p>
+                  <div className="col-span-2 flex items-center justify-center min-w-[100px]">
+                    <p className="font-medium">Actions</p>
                   </div>
                 </div>
 
                 {data?.data?.map((appointment: any, key: number) => (
-                  <div key={key} className="border-t border-stroke px-4 py-4 md:px-6 2xl:px-7"><a>
+                  <div key={key} className="border-t border-stroke px-4 py-4 md:px-6 2xl:px-7">
                     {/* Mobile view: single cell display */}
-                    <div className="md:hidden space-y-2"><a>
-                      <p className="text-md font-bold"><a><span className="font-bold"><a>Service: </span> {appointment.servicetype}</p>
-                      <p className="text-sm"><a>
-                        <span className="font-bold"><a>Time: </span>  {format(appointment.startDate, "yyyy-MM-dd")} {appointment.startTime} - {format(appointment.endDate, "yyyy-MM-dd")} {appointment.endTime}
+                    <div className="md:hidden space-y-2">
+                      <p className="text-md font-bold"><span className="font-bold">Service: </span> {appointment.servicetype}</p>
+                      <p className="text-sm">
+                        <span className="font-bold">Time: </span>  {format(appointment.startDate, "yyyy-MM-dd")} {appointment.startTime} - {format(appointment.endDate, "yyyy-MM-dd")} {appointment.endTime}
                       </p>
-                      <p className="text-sm text-meta-3"><a>
-                        <span className="font-bold"><a>Frequency: </span>
+                      <p className="text-sm text-meta-3">
+                        <span className="font-bold">Frequency: </span>
                         {appointment.frequency}
                       </p>
-                      <div className="flex justify-between items-center"><a>
-                        <p className="font-bold"><a>Actions:</p>
+                      <div className="flex justify-between items-center">
+                        <p className="font-bold">Actions:</p>
 
-                        <div className="flex space-x-3 mt-2"><a>
+                        <div className="flex space-x-3 mt-2">
                           <button
                             className="text-blue-500 hover:text-blue-700"
                             onClick={() => {
@@ -548,19 +548,19 @@ const [page, setPage] = useState(1);
                     </div>
 
                     {/* Desktop view: grid layout */}
-                    <div className="hidden md:grid md:grid-cols-12"><a>
-                      <div className="col-span-4"><a>
-                        <p className="text-md font-bold"><a> {appointment.servicetype}</p>
+                    <div className="hidden md:grid md:grid-cols-12">
+                      <div className="col-span-4">
+                        <p className="text-md font-bold"> {appointment.servicetype}</p>
                       </div>
-                      <div className="col-span-4 flex items-center"><a>
-                        <p className="text-sm"><a>
+                      <div className="col-span-4 flex items-center">
+                        <p className="text-sm">
                           {format(appointment.startDate, "yyyy-MM-dd")} {appointment.startTime} - {format(appointment.endDate, "yyyy-MM-dd")} {appointment.endTime}
                         </p>
                       </div>
-                      <div className="col-span-2 flex items-center"><a>
-                        <p className="text-sm text-meta-3"><a>{appointment.frequency}</p>
+                      <div className="col-span-2 flex items-center">
+                        <p className="text-sm text-meta-3">{appointment.frequency}</p>
                       </div>
-                      <div className="col-span-2 flex justify-center items-center space-x-3"><a>
+                      <div className="col-span-2 flex justify-center items-center space-x-3">
                         <button
                           className="text-blue-500 hover:text-blue-700"
                           onClick={() => {
@@ -596,7 +596,7 @@ const [page, setPage] = useState(1);
                 ))}
 
                 {(data?.data?.length === 0 || !data) && (
-                  <div className="text-black py-4 text-sm text-center bg-white border"><a>
+                  <div className="text-black py-4 text-sm text-center bg-white border">
                     No Bookings Right Now!
                   </div>
                 )}
