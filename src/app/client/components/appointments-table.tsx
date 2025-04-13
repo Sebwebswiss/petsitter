@@ -14,7 +14,6 @@ import {
 import Loader from "@/components/loader";
 import { format } from "date-fns";
 
-
 const services = [
   {
     id: "pet-sitting",
@@ -54,19 +53,24 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
     endTime: "",
   });
 
+  const [phone, setPhone] = useState("");
+  const isPhoneValid = /^\d{10,}$/.test(phone);
+
   const [page, setPage] = useState(1);
   const limit = dashboard ? 5 : 10;
 
-  const { data, isLoading, isFetching, error } = useGetBookingsQuery({ page, limit });
+  const { data, isLoading, isFetching, error } = useGetBookingsQuery({
+    page,
+    limit,
+  });
   const { data: bookedData } = useGetBookedBookingsQuery(
     editingAppointment?._id || ""
   );
-  console.log("🚀 ~ AppointmentsTable ~ bookedData:", bookedData)
+  console.log("🚀 ~ AppointmentsTable ~ bookedData:", bookedData);
 
   const [createBooking] = useCreateBookingMutation();
   const [updateBooking] = useUpdateBookingMutation();
   const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
-
 
   const formatDate = (date: Date | null) => {
     if (!date) return "Date";
@@ -95,7 +99,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
     }
     if (selectedRange.startDate === selectedRange.endDate) {
       if (selectedTimeRange.startTime === selectedTimeRange.endTime) {
-        toast.error("Start and End Time Must Not Be Same")
+        toast.error("Start and End Time Must Not Be Same");
         return;
       }
     }
@@ -104,21 +108,19 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
   };
 
   const confirmBookingRequest = async () => {
-
-
     try {
       if (editingAppointment) {
         await updateBooking({
           id: editingAppointment._id,
           startDate: selectedRange.startDate,
           endDate: selectedRange.endDate,
-
           startTime: selectedTimeRange.startTime,
           endTime: selectedTimeRange.endTime,
-
           servicetype: serviceType,
           frequency,
+          phone,
         }).unwrap();
+
         setSelectedRange({
           startDate: "",
           endDate: "",
@@ -136,9 +138,9 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
           endDate: selectedRange.endDate,
           startTime: selectedTimeRange.startTime,
           endTime: selectedTimeRange.endTime,
-
           servicetype: serviceType,
           frequency,
+          phone,
         }).unwrap();
 
         setSelectedRange({
@@ -161,6 +163,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
     setIsModalOpen(false);
     setShowScheduling(true);
     setEditingAppointment(null);
+    setPhone("");
   };
 
   const confirmDeleteBooking = async () => {
@@ -180,20 +183,30 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
     return <Loader />;
   }
 
-
   return (
     <div className="">
       {showConfirmModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <h3 className="text-xl font-bold mb-4">
-              {editingAppointment ? "Confirm Update" : "Confirm Booking Request"}
+              {editingAppointment
+                ? "Confirm Update"
+                : "Confirm Booking Request"}
             </h3>
             <p className="text-sm text-gray-600 mb-6">
               {editingAppointment
                 ? "This will update your booking details. Please confirm to proceed."
                 : "This is a booking request, not a confirmed booking. We will contact you to confirm the booking and arrange payment details. Please confirm to proceed."}
             </p>
+
+            <input
+              type="tel"
+              placeholder="Enter your phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="border border-gray-300 rounded px-4 py-2 w-full mb-4"
+            />
+
             <div className="flex justify-end space-x-4">
               <button
                 className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500 transition"
@@ -202,8 +215,12 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                 Cancel
               </button>
               <button
-                className="bg-golden text-white py-2 px-4 rounded transition"
+                className={`py-2 px-4 rounded transition ${isPhoneValid
+                    ? "bg-golden text-white hover:bg-yellow-500"
+                    : "bg-yellow-200 text-gray-400 cursor-not-allowed"
+                  }`}
                 onClick={confirmBookingRequest}
+                disabled={!isPhoneValid}
               >
                 Confirm
               </button>
@@ -251,8 +268,8 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                 key={service.id}
                 onClick={() => setServiceType(service.title)}
                 className={`flex items-center p-4 border rounded-md cursor-pointer transition-colors ${serviceType === service.title
-                  ? "border-primary bg-gray-100"
-                  : "border-gray-300"
+                    ? "border-primary bg-gray-100"
+                    : "border-gray-300"
                   }`}
               >
                 <div className="w-6 flex-shrink-0 flex justify-center items-center">
@@ -343,7 +360,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
       ) : (
         <>
           <div className="md:hidden flex items-center justify-end mb-4">
-
             {!dashboard && (
               <button
                 className="flex justify-center rounded bg-golden px-6 py-2 font-semibold text-gray hover:bg-opacity-90"
@@ -382,7 +398,7 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                   </button>
                 )}
               </div>
-              
+
               <div>
                 {/* Desktop header (hidden on mobile) */}
                 <div className="hidden md:grid md:grid-cols-12 border-t border-stroke px-4 py-4 md:px-6 2xl:px-7.5 text-black">
@@ -401,12 +417,22 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                 </div>
 
                 {data?.data?.map((appointment: any, key: number) => (
-                  <div key={key} className="border-t border-stroke px-4 py-4 md:px-6 2xl:px-7">
+                  <div
+                    key={key}
+                    className="border-t border-stroke px-4 py-4 md:px-6 2xl:px-7"
+                  >
                     {/* Mobile view: single cell display */}
                     <div className="md:hidden space-y-2">
-                      <p className="text-md font-bold"><span className="font-bold">Service: </span> {appointment.servicetype}</p>
+                      <p className="text-md font-bold">
+                        <span className="font-bold">Service: </span>{" "}
+                        {appointment.servicetype}
+                      </p>
                       <p className="text-sm">
-                        <span className="font-bold">Time: </span>  {format(appointment.startDate, "yyyy-MM-dd")} {appointment.startTime} - {format(appointment.endDate, "yyyy-MM-dd")} {appointment.endTime}
+                        <span className="font-bold">Time: </span>{" "}
+                        {format(appointment.startDate, "yyyy-MM-dd")}{" "}
+                        {appointment.startTime} -{" "}
+                        {format(appointment.endDate, "yyyy-MM-dd")}{" "}
+                        {appointment.endTime}
                       </p>
                       <p className="text-sm text-meta-3">
                         <span className="font-bold">Frequency: </span>
@@ -452,15 +478,23 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                     {/* Desktop view: grid layout */}
                     <div className="hidden md:grid md:grid-cols-12">
                       <div className="col-span-4">
-                        <p className="text-md font-bold"> {appointment.servicetype}</p>
+                        <p className="text-md font-bold">
+                          {" "}
+                          {appointment.servicetype}
+                        </p>
                       </div>
                       <div className="col-span-4 flex items-center">
                         <p className="text-sm">
-                          {format(appointment.startDate, "yyyy-MM-dd")} {appointment.startTime} - {format(appointment.endDate, "yyyy-MM-dd")} {appointment.endTime}
+                          {format(appointment.startDate, "yyyy-MM-dd")}{" "}
+                          {appointment.startTime} -{" "}
+                          {format(appointment.endDate, "yyyy-MM-dd")}{" "}
+                          {appointment.endTime}
                         </p>
                       </div>
                       <div className="col-span-2 flex items-center">
-                        <p className="text-sm text-meta-3">{appointment.frequency}</p>
+                        <p className="text-sm text-meta-3">
+                          {appointment.frequency}
+                        </p>
                       </div>
                       <div className="col-span-2 flex justify-center items-center space-x-3">
                         <button
@@ -503,7 +537,6 @@ const AppointmentsTable = ({ dashboard }: { dashboard: boolean }) => {
                   </div>
                 )}
               </div>
-
             </div>
           </div>
         </>
