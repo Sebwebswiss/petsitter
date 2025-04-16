@@ -71,7 +71,7 @@ const Navbar = () => {
           <div className="flex items-center w-full justify-between">
             <div className="flex-shrink-0 py-4">
               <Link href="/">
-                <h1 className="text-3xl md:text-4xl font-bold ">Pet Sitter</h1>
+                <h2 className="text-3xl md:text-4xl font-bold ">Pet Sitter</h2>
               </Link>
             </div>
             <div className="hidden md:block uppercase font-[800]">
