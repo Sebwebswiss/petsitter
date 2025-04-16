@@ -97,11 +97,13 @@ const VisionMission = () => {
                 OUR MISSION
               </h3>
               <p className="mt-4 text-[15px] text-white font-body">
-                Our mission is to provide compassionate, high-quality pet care
-                services that enhance the well-being of pets and their owners.
-                From grooming and veterinary care to pet training and boarding,
-                we are dedicated to making pet care convenient, safe, and
-                stress-free.
+                Our mission is to deliver professional, heart-driven pet care
+                across Boca Raton and surrounding communities. From daily dog
+                walks and in-home sitting to feeding visits and real-time
+                updates, we are committed to giving every pet the attention they
+                deserve — and every owner the peace of mind they need. Whether
+                it’s a weekend getaway or a busy workweek, we make pet care
+                simple, stress-free, and full of love.
               </p>
             </div>
           </div>
