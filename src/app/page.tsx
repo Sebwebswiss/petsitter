@@ -11,6 +11,39 @@ import Testimonials from '@/components/testimonials'
 import Values from '@/components/values'
 import WhyUs from '@/components/why-us'
 import React from 'react'
+import type { Metadata } from "next";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+  description: "Book trusted and loving pet sitters for your furry companions. We offer professional care, flexible plans, and 24/7 support. Your pet deserves the best!",
+  keywords: ["pet sitter", "dog walking", "cat sitting", "pet care", "animal boarding", "Boca Raton pet care", "trusted pet sitter"],
+  openGraph: {
+    title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+    description: "Book trusted and loving pet sitters for your furry companions. We offer professional care, flexible plans, and 24/7 support.",
+    url: "https://petsitter-olive.vercel.app/",
+    siteName: "Pet Sitter",
+    images: [
+      {
+        url: "https://www.petsittersebastien.com/images/logo.png", // ✅ tvoja OG slika
+        width: 1200,
+        height: 630,
+        alt: "Pet Sitter - Your trusted pet care service",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+    description: "Reliable pet care from experienced sitters. Book your appointment today!",
+    images: ["https://www.petsittersebastien.com/images/logo.png"], // ✅ i za Twitter
+  },
+};
+
+
 
 const Page = () => {
   return (
