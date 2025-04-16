@@ -20,10 +20,10 @@ const poppins = Poppins({
   weight: "400",
 });
 
-export const metadata: Metadata = {
-  title: "Pet Sitter",
-  description: "Best Pet Sitter in your Town",
-};
+// export const metadata: Metadata = {
+//   title: "Pet Sitter",
+//   description: "Best Pet Sitter in your Town",
+// };
 
 export default function RootLayout({
   children,
