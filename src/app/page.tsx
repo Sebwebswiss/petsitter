@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     "Boca Raton pet care",
     "trusted pet sitter",
   ],
+  verification: {
+    google: "LVPvVCa0kh3kSR12NNVH45bOu7tF_ebTcNXo1-4VRrQ", 
+  },
   alternates: {
     canonical: "https://www.petsittersebastien.com/",
   },
