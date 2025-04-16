@@ -178,7 +178,7 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between px-4 py-4 z-50 mt-4">
           <Link href="/" onClick={() => setIsOpen(false)}>
-            <h1 className="text-4xl font-bold ">Pet Sitter</h1>
+            <h2 className="text-4xl font-bold ">Pet Sitter</h2>
           </Link>
           <button
             onClick={() => setIsOpen(false)}
