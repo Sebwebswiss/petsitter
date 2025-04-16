@@ -5,7 +5,7 @@ import Button from "./button";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const text = "Welcome to Pet sitter Sebastien, your trusted partner for pet sitting, walking, feeding visits, and check-ins in Boca Raton, Florida and within a 30-mile radius.";
+const text = "Trusted Pet Care Services by Pet Sitter Sebastien";
 
 const Hero = () => {
   return (
@@ -37,7 +37,7 @@ const Hero = () => {
                 </motion.span>
               </h1>
               <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-lg lg:mx-0 font-body">
-                Premium wellness services tailored for your companion&apos;s exclusive lifestyle.
+              Serving Boca Raton and surrounding areas with dog walking, pet sitting, and feeding visits.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
                 <div className="rounded-md shadow">
