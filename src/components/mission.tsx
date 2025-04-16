@@ -34,9 +34,7 @@ const textVariants = {
   },
 };
 
-
 const VisionMission = () => {
-
   return (
     <div className="bg-black md:py-16 md:mt-10 max-w-[90%] lg:max-w-6xl 2xl:max-w-7xl mx-auto">
       <motion.div
@@ -62,7 +60,11 @@ const VisionMission = () => {
           <div className="flex flex-col items-start flex-1">
             <div className="flex-shrink-0">
               <div className="flex items-center justify-center h-16 w-16">
-                <img src={"/icons/vission.png"} alt={`vision icon`} className="h-16 w-16" />
+                <img
+                  src={"/icons/vission.png"}
+                  alt={`vision icon`}
+                  className="h-16 w-16"
+                />
               </div>
             </div>
             <div className="mt-6">
@@ -70,17 +72,24 @@ const VisionMission = () => {
                 OUR VISION
               </h3>
               <p className="mt-4 text-[15px] text-white font-body">
-                Our vision is to create a world where every pet receives the love,
-                care, and attention they deserve. We strive to be the most trusted 
-                pet care provider, ensuring pets live healthier and happier lives 
-                through expert care and innovative solutions.
+                Our vision is to create a world where every pet feels safe,
+                loved, and cared for — not just at home, but wherever life takes
+                their owners. We aim to be Palm Beach County’s most trusted pet
+                care provider, offering personalized, reliable services that
+                help pets live healthier, happier lives. Through expert care,
+                innovation, and genuine compassion, we’re building a better
+                future for pets and their people.
               </p>
             </div>
           </div>
           <div className="flex flex-col items-start flex-1">
             <div className="flex-shrink-0">
               <div className="flex items-center justify-center h-16 w-16">
-                <img src={"/icons/mission.png"} alt={`mission icon`} className="h-16 w-16" />
+                <img
+                  src={"/icons/mission.png"}
+                  alt={`mission icon`}
+                  className="h-16 w-16"
+                />
               </div>
             </div>
             <div className="mt-6">
@@ -88,10 +97,11 @@ const VisionMission = () => {
                 OUR MISSION
               </h3>
               <p className="mt-4 text-[15px] text-white font-body">
-                Our mission is to provide compassionate, high-quality pet care services 
-                that enhance the well-being of pets and their owners. From grooming and 
-                veterinary care to pet training and boarding, we are dedicated to making 
-                pet care convenient, safe, and stress-free.
+                Our mission is to provide compassionate, high-quality pet care
+                services that enhance the well-being of pets and their owners.
+                From grooming and veterinary care to pet training and boarding,
+                we are dedicated to making pet care convenient, safe, and
+                stress-free.
               </p>
             </div>
           </div>
