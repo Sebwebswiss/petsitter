@@ -13,8 +13,6 @@ import WhyUs from '@/components/why-us'
 import React from 'react'
 import type { Metadata } from "next";
 
-import type { Metadata } from "next";
-
 export const metadata: Metadata = {
   title: "Pet Sitter | Trusted Pet Care Services in Your Town",
   description: "Book trusted and loving pet sitters for your furry companions. We offer professional care, flexible plans, and 24/7 support. Your pet deserves the best!",
