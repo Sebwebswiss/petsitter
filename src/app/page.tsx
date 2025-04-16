@@ -14,36 +14,21 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+  title: "Pet Sitter | Palm Beach County Dog Walking & Pet Sitting",
   description:
-    "Book trusted and loving pet sitters for your furry companions. We offer professional care, flexible plans, and 24/7 support. Your pet deserves the best!",
-  keywords: [
-    "pet sitter",
-    "dog walking",
-    "cat sitting",
-    "pet care",
-    "animal boarding",
-    "Boca Raton pet care",
-    "trusted pet sitter",
-  ],
-  verification: {
-    google: "LVPvVCa0kh3kSR12NNVH45bOu7tF_ebTcNXo1-4VRrQ", 
-  },
-  alternates: {
-    canonical: "https://www.petsittersebastien.com/",
-  },
+    "Book loving and professional pet care in Palm Beach County. Serving Boca Raton, Delray Beach, West Palm Beach, and surrounding areas.",
   openGraph: {
-    title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+    title: "Pet Sitter | Palm Beach County Dog Walking & Pet Sitting",
     description:
-      "Book trusted and loving pet sitters for your furry companions. We offer professional care, flexible plans, and 24/7 support.",
-    url: "https://petsitter-olive.vercel.app/",
-    siteName: "Pet Sitter",
+      "We offer trusted dog walking and pet sitting across Boca Raton, Delray Beach, and West Palm Beach. Book now with Sebastien!",
+    url: "https://www.petsittersebastien.com/",
+    siteName: "Pet Sitter Sebastien",
     images: [
       {
-        url: "https://www.petsittersebastien.com/images/logo.png", // ✅ tvoja OG slika
+        url: "https://www.petsittersebastien.com/images/logo.png",
         width: 1200,
         height: 630,
-        alt: "Pet Sitter - Your trusted pet care service",
+        alt: "Pet Sitter - Your trusted pet care service in Palm Beach",
       },
     ],
     locale: "en_US",
@@ -51,12 +36,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pet Sitter | Trusted Pet Care Services in Your Town",
+    title: "Palm Beach Pet Sitting by Sebastien",
     description:
-      "Reliable pet care from experienced sitters. Book your appointment today!",
-    images: ["https://www.petsittersebastien.com/images/logo.png"], // ✅ i za Twitter
+      "Loving care for your pets in Boca Raton, Delray Beach, and beyond.",
+    images: ["https://www.petsittersebastien.com/images/logo.png"],
+  },
+  alternates: {
+    canonical: "https://www.petsittersebastien.com/",
   },
 };
+
 
 const Page = () => {
   return (

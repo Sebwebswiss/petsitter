@@ -5,7 +5,7 @@ import Button from "./button";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const text = "Trusted Pet Care Services by Pet Sitter Sebastien";
+const text = "Loving Pet Care in Palm Beach Region by Sebastien";
 
 const Hero = () => {
   return (
@@ -37,7 +37,7 @@ const Hero = () => {
                 </motion.span>
               </h1>
               <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-lg lg:mx-0 font-body">
-              Serving Boca Raton and surrounding areas with dog walking, pet sitting, and feeding visits.
+              Serving Boca Raton, West Palm Beach, Delray Beach, and nearby areas — dog walking, pet sitting, feeding visits.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
                 <div className="rounded-md shadow">
