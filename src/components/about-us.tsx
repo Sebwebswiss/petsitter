@@ -98,8 +98,8 @@ const AboutUs = () => {
         >
           <div className="relative">
             <img
-              src="/images/about.jpg"
-              alt="Happy pets with our caretakers"
+              src="/images/sebastien-and-dog.jpg"
+              alt="Pet sitter Sebastien holding a dog in Boca Raton"
               className="w-full shadow-lg h-full"
             />
           </div>
