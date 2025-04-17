@@ -52,14 +52,12 @@ function getDateRangeArray(start: string, end: string): string[] {
   return dates;
 }
 
-function to24Hour(time: string): string {
+function getDateTime(date: string, time: string): Date {
   const [hourMinute, modifier] = time.split(" ");
   let [hours, minutes] = hourMinute.split(":").map(Number);
-
   if (modifier === "PM" && hours !== 12) hours += 12;
   if (modifier === "AM" && hours === 12) hours = 0;
-
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+  return new Date(`${date}T${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`);
 }
 
 const createBookingHandler = async (request: NextRequest) => {
@@ -69,33 +67,22 @@ const createBookingHandler = async (request: NextRequest) => {
     const req = await request.json();
     const user = request.user;
 
-    const newStart = to24Hour(req.startTime);
-    const newEnd = to24Hour(req.endTime);
-    const requestedDates = getDateRangeArray(req.startDate, req.endDate);
+    const newStartDates = getDateRangeArray(req.startDate, req.endDate);
+    const newStartDateTime = getDateTime(req.startDate, req.startTime);
+    const newEndDateTime = getDateTime(req.endDate, req.endTime);
 
     const bookings = await Booking.find({
-      $or: [
-        {
-          startDate: { $lte: req.endDate },
-          endDate: { $gte: req.startDate },
-        },
-      ],
+      startDate: { $lte: req.endDate },
+      endDate: { $gte: req.startDate },
     });
 
     const hasConflict = bookings.some((booking) => {
-      const bookingDates = getDateRangeArray(booking.startDate, booking.endDate);
-      const bookingStart = to24Hour(booking.startTime);
-      const bookingEnd = to24Hour(booking.endTime);
-
-      return requestedDates.some((date) => {
-        if (!bookingDates.includes(date)) return false;
-
-        const newStartDateTime = new Date(`${date}T${newStart}:00`);
-        const newEndDateTime = new Date(`${date}T${newEnd}:00`);
-        const bookingStartDateTime = new Date(`${date}T${bookingStart}:00`);
-        const bookingEndDateTime = new Date(`${date}T${bookingEnd}:00`);
-
-        return newStartDateTime < bookingEndDateTime && newEndDateTime > bookingStartDateTime;
+      const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
+      return newStartDates.some((date) => {
+        if (!existingDates.includes(date)) return false;
+        const bookingStart = getDateTime(date, booking.startTime);
+        const bookingEnd = getDateTime(date, booking.endTime);
+        return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
       });
     });
 
@@ -104,7 +91,7 @@ const createBookingHandler = async (request: NextRequest) => {
         success: false,
         status: 409,
         error: "This time slot is already booked.",
-      });
+      }, { status: 409 });
     }
 
     const newBooking = await Booking.create({ ...req, user: user._id });
