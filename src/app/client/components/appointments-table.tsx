@@ -155,12 +155,31 @@ const AppointmentsTable = ({
       
   
       if (editingAppointment) {
-        await updateBooking({ ... });
+        await updateBooking({
+          id: editingAppointment._id,
+          startDate: selectedRange.startDate,
+          endDate: selectedRange.endDate,
+          startTime: selectedTimeRange.startTime,
+          endTime: selectedTimeRange.endTime,
+          servicetype: serviceType,
+          frequency,
+          phone,
+        });
         toast.success("Booking updated successfully!");
       } else {
-        await createBooking({ ... });
+        await createBooking({
+          startDate: selectedRange.startDate,
+          endDate: selectedRange.endDate,
+          startTime: selectedTimeRange.startTime,
+          endTime: selectedTimeRange.endTime,
+          servicetype: serviceType,
+          frequency,
+          phone,
+        });
         toast.success("Booking request submitted successfully!");
       }
+      
+      
   
       // Reset state...
     } catch (error) {
