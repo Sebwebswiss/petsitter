@@ -52,6 +52,16 @@ function getDateRangeArray(start: string, end: string): string[] {
   return dates;
 }
 
+function to24Hour(time: string): string {
+  const [hourMinute, modifier] = time.split(" ");
+  let [hours, minutes] = hourMinute.split(":").map(Number);
+
+  if (modifier === "PM" && hours !== 12) hours += 12;
+  if (modifier === "AM" && hours === 12) hours = 0;
+
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
 const createBookingHandler = async (request: NextRequest) => {
   try {
     await connectDB();
@@ -59,8 +69,8 @@ const createBookingHandler = async (request: NextRequest) => {
     const req = await request.json();
     const user = request.user;
 
-    const newStart = req.startTime;
-    const newEnd = req.endTime;
+    const newStart = to24Hour(req.startTime);
+    const newEnd = to24Hour(req.endTime);
     const requestedDates = getDateRangeArray(req.startDate, req.endDate);
 
     const bookings = await Booking.find({
@@ -74,13 +84,16 @@ const createBookingHandler = async (request: NextRequest) => {
 
     const hasConflict = bookings.some((booking) => {
       const bookingDates = getDateRangeArray(booking.startDate, booking.endDate);
+      const bookingStart = to24Hour(booking.startTime);
+      const bookingEnd = to24Hour(booking.endTime);
+
       return requestedDates.some((date) => {
         if (!bookingDates.includes(date)) return false;
 
         const newStartDateTime = new Date(`${date}T${newStart}:00`);
         const newEndDateTime = new Date(`${date}T${newEnd}:00`);
-        const bookingStartDateTime = new Date(`${date}T${booking.startTime}:00`);
-        const bookingEndDateTime = new Date(`${date}T${booking.endTime}:00`);
+        const bookingStartDateTime = new Date(`${date}T${bookingStart}:00`);
+        const bookingEndDateTime = new Date(`${date}T${bookingEnd}:00`);
 
         return newStartDateTime < bookingEndDateTime && newEndDateTime > bookingStartDateTime;
       });
