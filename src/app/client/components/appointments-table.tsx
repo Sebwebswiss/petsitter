@@ -94,6 +94,30 @@ const AppointmentsTable = ({
     return `${year}-${month}-${day}`;
   };
 
+  const checkBookingConflict = async () => {
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          startDate: selectedRange.startDate,
+          endDate: selectedRange.endDate,
+          startTime: selectedTimeRange.startTime,
+          endTime: selectedTimeRange.endTime,
+        }),
+      });
+  
+      const data = await res.json();
+      return data.conflict;
+    } catch (error) {
+      console.error("Conflict check failed:", error);
+      return false;
+    }
+  };
+  
+
   // Called when user clicks "Request Booking" or "Update Booking"
   const handleRequestBooking = () => {
     if (!selectedRange.startDate || !selectedRange.endDate) {
@@ -123,52 +147,29 @@ const AppointmentsTable = ({
 
   const confirmBookingRequest = async () => {
     try {
-      if (editingAppointment) {
-        await updateBooking({
-          id: editingAppointment._id,
-          startDate: selectedRange.startDate,
-          endDate: selectedRange.endDate,
-          startTime: selectedTimeRange.startTime,
-          endTime: selectedTimeRange.endTime,
-          servicetype: serviceType,
-          frequency,
-          phone,
-        }).unwrap();
+      const conflict = await checkBookingConflict();
+      if (conflict) {
+        toast.error("❌ This time slot is already booked. Please choose another.");
+        return;
+      }
+      
   
+      if (editingAppointment) {
+        await updateBooking({ ... });
         toast.success("Booking updated successfully!");
       } else {
-        await createBooking({
-          startDate: selectedRange.startDate,
-          endDate: selectedRange.endDate,
-          startTime: selectedTimeRange.startTime,
-          endTime: selectedTimeRange.endTime,
-          servicetype: serviceType,
-          frequency,
-          phone,
-        }).unwrap();
-  
+        await createBooking({ ... });
         toast.success("Booking request submitted successfully!");
       }
   
-      // Reset everything
-      setSelectedRange({ startDate: "", endDate: "" });
-      setSelectedTimeRange({ startTime: "00:00", endTime: "00:00" });
-      setServiceType("Pet Sitting");
-      setFrequency("One-Time");
-      setEditingAppointment(null);
-      setPhone("");
-      setIsModalOpen(false);
-      setShowScheduling(true);
-    } catch (error: any) {
-      if (error?.status === 409) {
-        toast.error("❌ This time slot is already booked. Please choose another.");
-      } else {
-        toast.error("Error processing booking");
-      }
+      // Reset state...
+    } catch (error) {
+      toast.error("Error processing booking");
     } finally {
       setShowConfirmModal(false);
     }
   };
+  
   
 
   // const hasConflict = bookings.some((booking) => {
@@ -555,7 +556,29 @@ const AppointmentsTable = ({
           </div>
         </>
       )}
-    </div>
+    </div>const checkBookingConflict = async () => {
+  try {
+    const res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        startDate: selectedRange.startDate,
+        endDate: selectedRange.endDate,
+        startTime: selectedTimeRange.startTime,
+        endTime: selectedTimeRange.endTime,
+      }),
+    });
+
+    const data = await res.json();
+    return data.conflict;
+  } catch (error) {
+    console.error("Conflict check failed:", error);
+    return false;
+  }
+};
+
   );
 };
 

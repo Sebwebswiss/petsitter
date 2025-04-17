@@ -78,13 +78,11 @@ const createBookingHandler = async (request: NextRequest) => {
 
     const hasConflict = bookings.some((booking) => {
       const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
-      return newStartDates.some((date) => {
-        if (!existingDates.includes(date)) return false;
+      return existingDates.some((date) => {
+        if (!newStartDates.includes(date)) return false;
         const bookingStart = getDateTime(date, booking.startTime);
         const bookingEnd = getDateTime(date, booking.endTime);
-        const conflict = newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
-        if (conflict) console.log("Conflict detected with booking:", booking);
-        return conflict;
+        return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
       });
     });
 
