@@ -57,7 +57,9 @@ function getDateTime(date: string, time: string): Date {
   let [hours, minutes] = hourMinute.split(":").map(Number);
   if (modifier === "PM" && hours !== 12) hours += 12;
   if (modifier === "AM" && hours === 12) hours = 0;
-  return new Date(`${date}T${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`);
+  const formatted = `${date}T${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
+  console.log("Converting time:", time, "->", formatted);
+  return new Date(formatted);
 }
 
 const createBookingHandler = async (request: NextRequest) => {
@@ -66,6 +68,8 @@ const createBookingHandler = async (request: NextRequest) => {
 
     const req = await request.json();
     const user = request.user;
+
+    console.log("Booking request:", req);
 
     const newStartDates = getDateRangeArray(req.startDate, req.endDate);
     const newStartDateTime = getDateTime(req.startDate, req.startTime);
@@ -76,13 +80,19 @@ const createBookingHandler = async (request: NextRequest) => {
       endDate: { $gte: req.startDate },
     });
 
+    console.log("Existing bookings found:", bookings.length);
+
     const hasConflict = bookings.some((booking) => {
       const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
       return newStartDates.some((date) => {
         if (!existingDates.includes(date)) return false;
         const bookingStart = getDateTime(date, booking.startTime);
         const bookingEnd = getDateTime(date, booking.endTime);
-        return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
+        const conflict = newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
+        if (conflict) {
+          console.log("Conflict detected with booking:", booking);
+        }
+        return conflict;
       });
     });
 
