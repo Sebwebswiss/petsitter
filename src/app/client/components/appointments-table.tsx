@@ -150,7 +150,7 @@ const AppointmentsTable = ({
         toast.success("Booking request submitted successfully!");
       }
   
-      // Reset form after success
+      // Reset everything
       setSelectedRange({ startDate: "", endDate: "" });
       setSelectedTimeRange({ startTime: "00:00", endTime: "00:00" });
       setServiceType("Pet Sitting");
@@ -171,6 +171,15 @@ const AppointmentsTable = ({
   };
   
 
+  // const hasConflict = bookings.some((booking) => {
+  //   const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
+  //   return newStartDates.some((date) => {
+  //     if (!existingDates.includes(date)) return false;
+  //     const bookingStart = getDateTime(date, booking.startTime);
+  //     const bookingEnd = getDateTime(date, booking.endTime);
+  //     return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
+  //   });
+  // });
   const confirmDeleteBooking = async () => {
     if (appointmentToDelete) {
       try {
