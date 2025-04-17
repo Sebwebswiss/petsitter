@@ -134,17 +134,7 @@ const AppointmentsTable = ({
           frequency,
           phone,
         }).unwrap();
-
-        setSelectedRange({
-          startDate: "",
-          endDate: "",
-        });
-        setSelectedTimeRange({
-          startTime: "",
-          endTime: "",
-        });
-        setServiceType("Pet Sitting");
-        setFrequency("One-Time");
+  
         toast.success("Booking updated successfully!");
       } else {
         await createBooking({
@@ -156,29 +146,30 @@ const AppointmentsTable = ({
           frequency,
           phone,
         }).unwrap();
-
-        setSelectedRange({
-          startDate: "",
-          endDate: "",
-        });
-        setSelectedTimeRange({
-          startTime: "00:00",
-          endTime: "00:00",
-        });
-        setServiceType("Pet Sitting");
-        setFrequency("One-Time");
-
+  
         toast.success("Booking request submitted successfully!");
       }
-    } catch (error) {
-      toast.error("Error processing booking");
+  
+      // Reset form after success
+      setSelectedRange({ startDate: "", endDate: "" });
+      setSelectedTimeRange({ startTime: "00:00", endTime: "00:00" });
+      setServiceType("Pet Sitting");
+      setFrequency("One-Time");
+      setEditingAppointment(null);
+      setPhone("");
+      setIsModalOpen(false);
+      setShowScheduling(true);
+    } catch (error: any) {
+      if (error?.status === 409) {
+        toast.error("❌ This time slot is already booked. Please choose another.");
+      } else {
+        toast.error("Error processing booking");
+      }
+    } finally {
+      setShowConfirmModal(false);
     }
-    setShowConfirmModal(false);
-    setIsModalOpen(false);
-    setShowScheduling(true);
-    setEditingAppointment(null);
-    setPhone("");
   };
+  
 
   const confirmDeleteBooking = async () => {
     if (appointmentToDelete) {
