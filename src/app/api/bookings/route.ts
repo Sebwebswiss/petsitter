@@ -78,13 +78,14 @@ const createBookingHandler = async (request: NextRequest) => {
 
     const hasConflict = bookings.some((booking) => {
       const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
-      return existingDates.some((date) => {
-        if (!newStartDates.includes(date)) return false;
+      return newStartDates.some((date) => {
+        if (!existingDates.includes(date)) return false;
         const bookingStart = getDateTime(date, booking.startTime);
         const bookingEnd = getDateTime(date, booking.endTime);
         return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
       });
     });
+    
 
     if (hasConflict) {
       return NextResponse.json({
