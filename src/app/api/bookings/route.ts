@@ -85,7 +85,6 @@ const createBookingHandler = async (request: NextRequest) => {
         return newStartDateTime < bookingEnd && newEndDateTime > bookingStart;
       });
     });
-    
 
     if (hasConflict) {
       return NextResponse.json({
