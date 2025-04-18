@@ -7,15 +7,20 @@ export const bookingApi = apiSlice.injectEndpoints({
       transformResponse: (response: { data: any[]; pagination: any }) => response,
       providesTags: ['BOOKINGS'],
     }),
-    getBookedBookings: builder.query<any, string>({
-      query: (excludeId) => {
+    getBookedBookings: builder.query<
+      any,
+      { startDate: string; endDate: string }
+    >({
+      query: ({ startDate, endDate }) => {
         const params = new URLSearchParams();
-        if (excludeId) params.append('bookingId', excludeId);
+        params.append('startDate', startDate);
+        params.append('endDate', endDate);
         return `bookings/booked?${params.toString()}`;
       },
       transformResponse: (response: { data: any }) => response.data,
       providesTags: ['BOOKINGS'],
     }),
+
     getBookingById: builder.query<any, string>({
       query: (bookingId) => `bookings/${bookingId}`,
       transformResponse: (response: { data: any }) => response.data,

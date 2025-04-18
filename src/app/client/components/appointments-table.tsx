@@ -68,18 +68,26 @@ const AppointmentsTable = ({
   const limit = dashboard ? 5 : 10;
 
   useEffect(() => {
-    if (forceOpenForm) {
-      setIsModalOpen(true);
-    }
-  }, [forceOpenForm]);
+    // Kada se komponenta učita, automatski postavi današnji datum kao izabrani
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+  
+    setSelectedRange({
+      startDate: formattedDate,
+      endDate: formattedDate,
+    });
+  }, []);
+  
 
   const { data, isLoading, isFetching, error } = useGetBookingsQuery({
     page,
     limit,
   });
-  const { data: bookedData } = useGetBookedBookingsQuery(
-    editingAppointment?._id || ""
-  );
+  const { data: bookedData } = useGetBookedBookingsQuery({
+    startDate: selectedRange.startDate,
+    endDate: selectedRange.endDate,
+  });
+  
   console.log("🚀 ~ AppointmentsTable ~ bookedData:", bookedData);
 
   const [createBooking] = useCreateBookingMutation();
