@@ -13,7 +13,6 @@ const Page = () => {
         </div>
 
         <div className="container mx-auto py-8 flex flex-col md:flex-row justify-between gap-10">
-          {/* Left section */}
           <div className="md:w-[70%] rounded shadow">
             <img
               src="/images/pet-walk.jpg"
@@ -24,19 +23,19 @@ const Page = () => {
               Check-ins & Feeding Visits
             </h2>
             <div className="text-white mb-4">
-              If you don't require full pet sitting but want someone to check
-              in on your pet and handle feeding and care tasks, our
+              If you don&#39;t require full pet sitting but want someone to
+              check in on your pet and handle feeding and care tasks, our
               Check-ins/Feeding Visits are the perfect solution. During a
               check-in visit (often 15–30 minutes, timing based on your
               preference), we will ensure your pet is doing well and tend to
               their immediate needs. This service is ideal for cats, puppies,
               senior pets, or any pets that need a quick visit for meals and a
-              little TLC while you're out.
+              little TLC while you&#39;re out.
             </div>
 
             <div className="mt-6">
               <h3 className="text-xl font-semibold text-primary mb-2">
-                What's Included:
+                What&#39;s Included:
               </h3>
               <div>What you can expect from a check-in visit:</div>
               <ul className="list-disc list-inside text-gray-300 mt-2">
@@ -76,8 +75,8 @@ const Page = () => {
                 Booking Process
               </h3>
               <div>
-                We've made the booking process simple and user-friendly so you
-                can schedule pet care with confidence and ease. Here's a
+                We&#39;ve made the booking process simple and user-friendly so
+                you can schedule pet care with confidence and ease. Here&#39;s a
                 step-by-step guide on how to book a service with us:
               </div>
               <ul className="list-disc list-inside text-gray-300 mt-2">
@@ -85,39 +84,39 @@ const Page = () => {
                   <strong>Log In (or Sign Up) with Google:</strong> Visit our
                   booking page and log in using your Google account. This quick
                   login option is secure and saves you time – no need to
-                  remember another password. If you're a new user, you can
+                  remember another password. If you&#39;re a new user, you can
                   create a profile in seconds by linking your Google account.
                 </li>
                 <li className="py-2">
                   <strong>Select Your Service & Schedule:</strong> Choose the
                   service you need (pet sitting, walking, check-in, etc.) from
                   the menu. Then, select the dates and times that work for you.
-                  You'll be able to provide details about your pet (such as
+                  You&#39;ll be able to provide details about your pet (such as
                   their name, breed, any special needs or routines) and specify
                   instructions or preferences.
                 </li>
                 <li className="py-2">
-                  <strong>Confirm Your Booking:</strong> Once you've entered the
-                  details, submit your booking request. You'll receive an email
-                  confirmation shortly after, summarizing your booking details –
-                  including the service type, date/time, price, and any
-                  instructions you provided.
+                  <strong>Confirm Your Booking:</strong> Once you&#39;ve entered
+                  the details, submit your booking request. You&#39;ll receive
+                  an email confirmation shortly after, summarizing your booking
+                  details – including the service type, date/time, price, and
+                  any instructions you provided.
                 </li>
                 <li className="py-2">
-                  <strong>After Confirmation – What's Next:</strong> After your
-                  booking is confirmed via email, we'll reach out to you (if
-                  needed) to answer any remaining questions or arrange a
+                  <strong>After Confirmation – What&#39;s Next:</strong> After
+                  your booking is confirmed via email, we&#39;ll reach out to
+                  you (if needed) to answer any remaining questions or arrange a
                   meet-and-greet before the service. On the day of service,
-                  simply relax – we'll show up as scheduled and take great care
-                  of your pet!
+                  simply relax – we&#39;ll show up as scheduled and take great
+                  care of your pet!
                 </li>
               </ul>
               <h3 className="text-xl font-semibold text-primary mb-4 mt-2">
                 Need help or have questions before booking?
               </h3>
               <div className="mt-3">
-                We're here to assist. You can always contact us by phone or
-                email if you want to discuss your pet's needs in detail. Our
+                We&#39;re here to assist. You can always contact us by phone or
+                email if you want to discuss your pet&#39;s needs in detail. Our
                 system is designed to be hassle-free: Google login makes signing
                 in easy, and email confirmations provide a clear record of your
                 bookings.
@@ -125,7 +124,6 @@ const Page = () => {
             </div>
           </div>
 
-          {/* Right section */}
           <div className="md:w-[30%] rounded shadow sticky top-32 self-start">
             <h3 className="text-xl text-primary font-semibold mb-4">
               Other Services
@@ -160,7 +158,6 @@ const Page = () => {
           </div>
         </div>
 
-        {/* Background image call-to-action */}
         <div className="relative mt-10 text-center rounded-md h-[500px] bg-[url('/images/book.jpeg')] bg-cover bg-center bg-no-repeat">
           <div className="absolute inset-0 bg-black/50"></div>
           <div className="relative flex flex-col items-center justify-center h-full text-white">
