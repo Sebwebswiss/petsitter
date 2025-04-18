@@ -50,7 +50,7 @@ const AboutUs = () => {
             ABOUT US
           </h2>
           <p className="text-md text-white mb-6 font-body md:pr-16">
-            <p className="text-md text-white mb-6 font-body md:pr-16">
+         
               Pet Sitter Sebastien Services LLC is your trusted local provider
               of professional pet care in Boca Raton, Florida, and surrounding
               areas within a 30-mile radius. We specialize in pet sitting, dog
@@ -74,7 +74,7 @@ const AboutUs = () => {
               Ready to meet your pet&rsquo;s new best friend? Schedule your
               service today.
             </p>
-          </p>
+        
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center gap-4 lg:justify-start">
             <div>
               <Link href="/client/signup">
