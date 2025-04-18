@@ -575,28 +575,8 @@ const AppointmentsTable = ({
           </div>
         </>
       )}
-    </div>const checkBookingConflict = async () => {
-  try {
-    const res = await fetch("/api/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        startDate: selectedRange.startDate,
-        endDate: selectedRange.endDate,
-        startTime: selectedTimeRange.startTime,
-        endTime: selectedTimeRange.endTime,
-      }),
-    });
-
-    const data = await res.json();
-    return data.conflict;
-  } catch (error) {
-    console.error("Conflict check failed:", error);
-    return false;
-  }
-};
+    </div>
+    
 
   );
 };
