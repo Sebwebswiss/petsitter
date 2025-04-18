@@ -7,6 +7,16 @@ export const bookingApi = apiSlice.injectEndpoints({
       transformResponse: (response: { data: any[]; pagination: any }) => response,
       providesTags: ['BOOKINGS'],
     }),
+    // getBookedBookings: builder.query<any, string>({
+    //   query: (excludeId) => {
+    //     const params = new URLSearchParams();
+    //     if (excludeId) params.append('bookingId', excludeId);
+    //     return `bookings/booked?${params.toString()}`;
+    //   },
+    //   transformResponse: (response: { data: any }) => response.data,
+    //   providesTags: ['BOOKINGS'],
+    // }),
+
     getBookedBookings: builder.query<
       any,
       { startDate: string; endDate: string }
@@ -20,6 +30,7 @@ export const bookingApi = apiSlice.injectEndpoints({
       transformResponse: (response: { data: any }) => response.data,
       providesTags: ['BOOKINGS'],
     }),
+
 
     getBookingById: builder.query<any, string>({
       query: (bookingId) => `bookings/${bookingId}`,

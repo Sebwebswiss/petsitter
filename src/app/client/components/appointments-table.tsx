@@ -68,14 +68,14 @@ const AppointmentsTable = ({
   const limit = dashboard ? 5 : 10;
 
   useEffect(() => {
-    // Kada se komponenta učita, automatski postavi današnji datum kao izabrani
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-  
-    setSelectedRange({
-      startDate: formattedDate,
-      endDate: formattedDate,
-    });
+    if (forceOpenForm) {
+      setIsModalOpen(true);
+    }
+  }, [forceOpenForm]);
+
+  useEffect(() => {
+    const todayStr = new Date().toISOString().split("T")[0];
+    setSelectedRange({ startDate: todayStr, endDate: todayStr });
   }, []);
   
 
@@ -83,11 +83,17 @@ const AppointmentsTable = ({
     page,
     limit,
   });
-  const { data: bookedData } = useGetBookedBookingsQuery({
-    startDate: selectedRange.startDate,
-    endDate: selectedRange.endDate,
-  });
-  
+  // const { data: bookedData } = useGetBookedBookingsQuery(
+  //   editingAppointment?._id || ""
+  // );
+  const today = new Date();
+const formattedToday = today.toISOString().split("T")[0];
+
+const { data: bookedData } = useGetBookedBookingsQuery({
+  startDate: formattedToday,
+  endDate: formattedToday,
+});
+
   console.log("🚀 ~ AppointmentsTable ~ bookedData:", bookedData);
 
   const [createBooking] = useCreateBookingMutation();

@@ -44,13 +44,14 @@ const WhyUs: React.FC = () => {
       { threshold: 0.1 }
     );
 
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
+    const current = imageRef.current;
+    if (current) {
+      observer.observe(current);
     }
 
     return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
+      if (current) {
+        observer.unobserve(current);
       }
     };
   }, []);
@@ -62,9 +63,8 @@ const WhyUs: React.FC = () => {
           <div className="overflow-hidden relative z-20 rounded-[2.7rem]">
             <div
               ref={imageRef}
-              className={`absolute top-0 left-0 w-full md:w-[90%] h-full bg-primary transition-all rounded-[2.7rem] duration-[1s] ease-in-out ${
-                isInView ? "-translate-x-full" : "translate-x-0"
-              }`}
+              className={`absolute top-0 left-0 w-full md:w-[90%] h-full bg-primary transition-all rounded-[2.7rem] duration-[1s] ease-in-out ${isInView ? "-translate-x-full" : "translate-x-0"
+                }`}
             ></div>
             <Image
               src="/images/why-us.jpg"
