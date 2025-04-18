@@ -33,6 +33,15 @@ const services = [
   },
 ];
 
+const formatTimeTo12Hour = (timeStr: string) => {
+  const [hour, minute] = timeStr.split(":").map(Number);
+  const date = new Date();
+  date.setHours(hour);
+  date.setMinutes(minute);
+  return format(date, "h:mm a"); // koristi date-fns format
+};
+
+
 const AppointmentsTable = ({
   dashboard,
   forceOpenForm = false,
@@ -77,7 +86,7 @@ const AppointmentsTable = ({
     const todayStr = new Date().toISOString().split("T")[0];
     setSelectedRange({ startDate: todayStr, endDate: todayStr });
   }, []);
-  
+
 
   const { data, isLoading, isFetching, error } = useGetBookingsQuery({
     page,
@@ -87,12 +96,12 @@ const AppointmentsTable = ({
   //   editingAppointment?._id || ""
   // );
   const today = new Date();
-const formattedToday = today.toISOString().split("T")[0];
+  const formattedToday = today.toISOString().split("T")[0];
 
-const { data: bookedData } = useGetBookedBookingsQuery({
-  startDate: formattedToday,
-  endDate: formattedToday,
-});
+  const { data: bookedData } = useGetBookedBookingsQuery({
+    startDate: formattedToday,
+    endDate: formattedToday,
+  });
 
   console.log("🚀 ~ AppointmentsTable ~ bookedData:", bookedData);
 
@@ -122,7 +131,7 @@ const { data: bookedData } = useGetBookedBookingsQuery({
           endTime: selectedTimeRange.endTime,
         }),
       });
-  
+
       const data = await res.json();
       return data.conflict;
     } catch (error) {
@@ -130,7 +139,7 @@ const { data: bookedData } = useGetBookedBookingsQuery({
       return false;
     }
   };
-  
+
 
   // Called when user clicks "Request Booking" or "Update Booking"
   const handleRequestBooking = () => {
@@ -166,8 +175,8 @@ const { data: bookedData } = useGetBookedBookingsQuery({
         toast.error("❌ This time slot is already booked. Please choose another.");
         return;
       }
-      
-  
+
+
       if (editingAppointment) {
         await updateBooking({
           id: editingAppointment._id,
@@ -192,9 +201,9 @@ const { data: bookedData } = useGetBookedBookingsQuery({
         });
         toast.success("Booking request submitted successfully!");
       }
-      
-      
-  
+
+
+
       // Reset state...
     } catch (error) {
       toast.error("Error processing booking");
@@ -202,8 +211,8 @@ const { data: bookedData } = useGetBookedBookingsQuery({
       setShowConfirmModal(false);
     }
   };
-  
-  
+
+
 
   // const hasConflict = bookings.some((booking) => {
   //   const existingDates = getDateRangeArray(booking.startDate, booking.endDate);
@@ -264,8 +273,8 @@ const { data: bookedData } = useGetBookedBookingsQuery({
               </button>
               <button
                 className={`py-2 px-4 rounded transition ${isPhoneValid
-                    ? "bg-golden text-white hover:bg-yellow-500"
-                    : "bg-yellow-200 text-gray-400 cursor-not-allowed"
+                  ? "bg-golden text-white hover:bg-yellow-500"
+                  : "bg-yellow-200 text-gray-400 cursor-not-allowed"
                   }`}
                 onClick={confirmBookingRequest}
                 disabled={!isPhoneValid}
@@ -316,8 +325,8 @@ const { data: bookedData } = useGetBookedBookingsQuery({
                 key={service.id}
                 onClick={() => setServiceType(service.title)}
                 className={`flex items-center p-4 border rounded-md cursor-pointer transition-colors ${serviceType === service.title
-                    ? "border-primary bg-gray-100"
-                    : "border-gray-300"
+                  ? "border-primary bg-gray-100"
+                  : "border-gray-300"
                   }`}
               >
                 <div className="w-6 flex-shrink-0 flex justify-center items-center">
@@ -475,13 +484,21 @@ const { data: bookedData } = useGetBookedBookingsQuery({
                         <span className="font-bold">Service: </span>{" "}
                         {appointment.servicetype}
                       </p>
-                      <p className="text-sm">
+                      {/* <p className="text-sm">
                         <span className="font-bold">Time: </span>{" "}
                         {format(appointment.startDate, "yyyy-MM-dd")}{" "}
                         {appointment.startTime} -{" "}
                         {format(appointment.endDate, "yyyy-MM-dd")}{" "}
                         {appointment.endTime}
+                      </p> */}
+                      <p className="text-sm">
+                        <span className="font-bold">Time: </span>{" "}
+                        {format(appointment.startDate, "yyyy-MM-dd")}{" "}
+                        {formatTimeTo12Hour(appointment.startTime)} -{" "}
+                        {format(appointment.endDate, "yyyy-MM-dd")}{" "}
+                        {formatTimeTo12Hour(appointment.endTime)}
                       </p>
+
                       <p className="text-sm text-meta-3">
                         <span className="font-bold">Frequency: </span>
                         {appointment.frequency}
@@ -532,12 +549,20 @@ const { data: bookedData } = useGetBookedBookingsQuery({
                         </p>
                       </div>
                       <div className="col-span-4 flex items-center">
-                        <p className="text-sm">
+                        {/* 24 sata corection desktop*/}
+                        {/* <p className="text-sm">
                           {format(appointment.startDate, "yyyy-MM-dd")}{" "}
                           {appointment.startTime} -{" "}
                           {format(appointment.endDate, "yyyy-MM-dd")}{" "}
                           {appointment.endTime}
+                        </p> */}
+                        <p className="text-sm">
+                          {format(appointment.startDate, "yyyy-MM-dd")}{" "}
+                          {formatTimeTo12Hour(appointment.startTime)} -{" "}
+                          {format(appointment.endDate, "yyyy-MM-dd")}{" "}
+                          {formatTimeTo12Hour(appointment.endTime)}
                         </p>
+
                       </div>
                       <div className="col-span-2 flex items-center">
                         <p className="text-sm text-meta-3">
@@ -590,7 +615,8 @@ const { data: bookedData } = useGetBookedBookingsQuery({
         </>
       )}
     </div>
-    
+
+
 
   );
 };
